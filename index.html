@@ -1,0 +1,4294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fair Farms Act of 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,600&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --loam: #1c1917;
+    --loam-soft: #292524;
+    --paper: #f5f1e8;
+    --paper-warm: #ede5d0;
+    --paper-deep: #e0d5b7;
+    --paper-cover: #f8f5ec;
+    --harvest: #c89732;
+    --harvest-deep: #8b6914;
+    --sage: #5c6b3c;
+    --sage-deep: #3d4a26;
+    --rust: #a8451f;
+    --ink: #2a2520;
+    --rule: #8b7355;
+    --rule-light: #c4b594;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at top, rgba(200,151,50,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, rgba(92,107,60,0.05) 0%, transparent 60%);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+  }
+
+  /* ============ NAVIGATION ============ */
+  .topbar {
+    background: var(--loam);
+    color: var(--paper);
+    padding: 8px 6%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--harvest);
+  }
+  .topbar-left { color: var(--harvest); }
+  .topbar-right { color: var(--paper-deep); }
+
+  .brandbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 18px 6% 14px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: var(--loam);
+    text-decoration: none;
+    font-variation-settings: "opsz" 144;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .brand-mark {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--loam);
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .brand-mark::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: var(--harvest);
+    border-radius: 50%;
+  }
+  .brand small {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--loam-soft);
+    margin-left: 4px;
+  }
+  .brandbar-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--loam-soft);
+  }
+
+  .nav {
+    background: var(--paper-warm);
+    border-bottom: 2px solid var(--loam);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .nav-inner {
+    display: flex;
+    padding: 0 6%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .nav button {
+    flex-shrink: 0;
+    font-family: 'Source Serif 4', serif;
+    font-size: 14.5px;
+    color: var(--loam-soft);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 16px 22px;
+    border-right: 1px solid var(--rule-light);
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .nav button:first-child { border-left: 1px solid var(--rule-light); }
+  .nav button:hover { background: var(--paper-deep); color: var(--loam); }
+  .nav button .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    color: var(--harvest-deep);
+    font-weight: 500;
+  }
+  .nav button.active {
+    background: var(--loam);
+    color: var(--paper);
+  }
+  .nav button.active .num { color: var(--harvest); }
+
+  .nav button.proposal-link {
+    margin-left: auto;
+    background: var(--harvest);
+    color: var(--loam);
+    font-weight: 600;
+    font-style: italic;
+  }
+  .nav button.proposal-link:hover { background: var(--harvest-deep); color: var(--paper); }
+  .nav button.proposal-link.active { background: var(--loam); color: var(--harvest); }
+  .nav button.proposal-link .num { color: var(--loam); }
+  .nav button.proposal-link.active .num { color: var(--harvest); }
+
+  /* ============ TAB SYSTEM ============ */
+  main { flex: 1; }
+
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+  }
+  .tab-panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============ SHARED COMPONENTS ============ */
+  .page-header {
+    padding: 60px 8% 50px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .page-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .page-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--rust);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .page-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .page-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(40px, 5.5vw, 76px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    color: var(--loam);
+    font-variation-settings: "opsz" 144;
+    max-width: 1000px;
+  }
+  .page-title em {
+    font-style: italic;
+    color: var(--harvest-deep);
+    font-weight: 500;
+  }
+  .page-deck {
+    font-family: 'Source Serif 4', serif;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--loam-soft);
+    margin-top: 28px;
+    max-width: 720px;
+    font-style: italic;
+  }
+
+  .stats-bar {
+    background: var(--loam);
+    color: var(--paper);
+    padding: 50px 8%;
+    position: relative;
+  }
+  .stats-bar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: repeating-linear-gradient(90deg, var(--harvest) 0 20px, var(--loam) 20px 24px);
+  }
+  .stats-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--harvest);
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(245,241,232,0.2);
+    border-bottom: 1px solid rgba(245,241,232,0.2);
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .stat {
+    padding: 28px 24px;
+    border-right: 1px solid rgba(245,241,232,0.15);
+    text-align: center;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-fig {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1;
+    color: var(--paper);
+    font-variation-settings: "opsz" 144;
+    letter-spacing: -0.03em;
+  }
+  .stat-fig sup {
+    font-size: 0.4em;
+    font-weight: 500;
+    color: var(--harvest);
+    vertical-align: top;
+    margin-left: 4px;
+  }
+  .stat-label {
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--paper-deep);
+    margin-top: 14px;
+    line-height: 1.4;
+  }
+
+  .section {
+    padding: 80px 8% 70px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-warm { background: var(--paper-warm); }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    margin-bottom: 50px;
+    align-items: baseline;
+  }
+  .section-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--harvest-deep);
+    font-style: italic;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 3.4vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--loam);
+  }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--sage-deep);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .pull-quote {
+    margin: 80px auto;
+    max-width: 880px;
+    padding: 50px 60px;
+    border-top: 3px double var(--loam);
+    border-bottom: 3px double var(--loam);
+    text-align: center;
+    position: relative;
+  }
+  .pull-quote::before {
+    content: '"';
+    position: absolute;
+    top: -10px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--paper);
+    padding: 0 16px;
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--harvest-deep);
+  }
+  .pull-quote p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: var(--loam);
+  }
+  .pull-quote cite {
+    display: block;
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-style: normal;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+  }
+
+  .page-foot {
+    padding: 60px 8%;
+    border-top: 3px double var(--loam);
+    background: var(--paper);
+  }
+  .page-foot-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .page-foot button {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+    transition: color 0.2s;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+  }
+  .page-foot button:hover { color: var(--harvest-deep); }
+  .page-foot button.next { text-align: right; }
+  .page-foot button .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .page-foot button .target {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    font-style: italic;
+  }
+
+  .colophon {
+    background: var(--loam);
+    color: var(--paper-deep);
+    padding: 60px 8% 30px;
+    border-top: 6px solid var(--harvest);
+  }
+  .colophon-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(245,241,232,0.15);
+  }
+  .colophon-mark {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 14px;
+  }
+  .colophon-tagline {
+    font-style: italic;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--paper-deep);
+    max-width: 380px;
+  }
+  .colophon h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--harvest);
+    margin-bottom: 14px;
+  }
+  .colophon ul {
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .colophon ul li { color: var(--paper-deep); }
+  .colophon-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rule-light);
+  }
+
+  .wheat-divider {
+    text-align: center;
+    margin: 40px 0;
+    color: var(--harvest-deep);
+    letter-spacing: 30px;
+    font-size: 14px;
+  }
+
+  /* ============ OVERVIEW PAGE ============ */
+  .hero-overview {
+    padding: 70px 8% 80px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .hero-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .hero-lead { grid-column: 1 / 3; }
+  .masthead-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(56px, 11vw, 156px);
+    line-height: 0.85;
+    letter-spacing: -0.045em;
+    color: var(--loam);
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+    margin-bottom: 30px;
+  }
+  .masthead-title em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--harvest-deep);
+  }
+  .hero-deck {
+    font-family: 'Source Serif 4', serif;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--loam-soft);
+    margin-top: 24px;
+    max-width: 600px;
+  }
+  .hero-deck::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 4em;
+    font-weight: 600;
+    float: left;
+    line-height: 0.85;
+    margin: 4px 8px -4px 0;
+    color: var(--harvest-deep);
+  }
+  .hero-meta {
+    border-left: 2px solid var(--harvest);
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .hero-meta dt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--sage-deep);
+    margin-top: 14px;
+  }
+  .hero-meta dt:first-child { margin-top: 0; }
+  .hero-meta dd { color: var(--loam); font-weight: 500; margin-top: 2px; }
+  .hero-art {
+    grid-column: 1 / 4;
+    margin-top: 40px;
+    padding: 40px 0 20px;
+    border-top: 1px solid var(--rule-light);
+  }
+  .hero-art svg {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+  }
+  .pillar {
+    padding: 44px 32px;
+    border-right: 1px solid var(--rule-light);
+  }
+  .pillar:last-child { border-right: none; }
+  .pillar-roman {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 36px;
+    color: var(--harvest);
+    line-height: 1;
+    margin-bottom: 22px;
+  }
+  .pillar-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--loam);
+    margin-bottom: 16px;
+  }
+  .pillar-desc {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--loam-soft);
+  }
+
+  /* ============ PROBLEM PAGE ============ */
+  .compare {
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+    margin-top: 20px;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr;
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row.header {
+    background: var(--paper-deep);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--loam);
+  }
+  .compare-row.header > div { padding: 14px 22px; }
+  .compare-cell {
+    padding: 28px 22px;
+    border-left: 1px solid var(--rule-light);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .compare-cell:first-child {
+    border-left: none;
+    background: var(--paper-warm);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--loam);
+  }
+  .compare-cell:first-child .citation {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--sage-deep);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 400;
+    display: block;
+    margin-top: 8px;
+  }
+  .compare-cell.before { color: var(--rust); }
+  .compare-cell.after { color: var(--sage-deep); font-weight: 500; }
+  .compare-cell strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .compare-cell.before strong { color: var(--rust); }
+  .compare-cell.after strong { color: var(--sage-deep); }
+
+  .deep-dive {
+    background: var(--paper-warm);
+    padding: 50px;
+    border-left: 4px solid var(--harvest);
+    margin: 50px 0;
+    max-width: 1000px;
+  }
+  .deep-dive .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--harvest-deep);
+    margin-bottom: 14px;
+  }
+  .deep-dive h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--loam);
+    margin-bottom: 20px;
+  }
+  .deep-dive p {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--loam-soft);
+    margin-bottom: 14px;
+  }
+  .deep-dive p:last-child { margin-bottom: 0; }
+
+  .number-feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin: 60px 0;
+    max-width: 1100px;
+  }
+  .number-feature .number {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(120px, 18vw, 220px);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    color: var(--harvest-deep);
+    font-variation-settings: "opsz" 144;
+  }
+  .number-feature .number sup {
+    font-size: 0.4em;
+    color: var(--rust);
+  }
+  .number-feature .desc {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--loam);
+    font-style: italic;
+  }
+  .number-feature .desc small {
+    display: block;
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-style: normal;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+  }
+
+  /* ============ TIERS PAGE ============ */
+  .tier-stack {
+    margin-top: 30px;
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+  }
+  .tier-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 1.5fr 280px;
+    gap: 36px;
+    padding: 44px 0;
+    border-bottom: 1px solid var(--rule-light);
+    align-items: start;
+  }
+  .tier-row:last-child { border-bottom: none; }
+  .tier-roman {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 56px;
+    color: var(--harvest);
+    line-height: 1;
+  }
+  .tier-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--loam);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .tier-name small {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--sage-deep);
+    margin-top: 12px;
+  }
+  .tier-share {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dotted var(--rule);
+    font-size: 13px;
+    color: var(--loam-soft);
+    font-style: italic;
+  }
+  .tier-share b { font-style: normal; color: var(--loam); font-weight: 600; }
+  .tier-desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--loam-soft);
+  }
+  .tier-stats {
+    border-left: 2px solid var(--harvest);
+    padding-left: 22px;
+  }
+  .tier-stat { margin-bottom: 16px; }
+  .tier-stat:last-child { margin-bottom: 0; }
+  .tier-stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 32px;
+    color: var(--loam);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .tier-stat-num.disabled { color: var(--rust); text-decoration: line-through; text-decoration-thickness: 2px; }
+  .tier-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--sage-deep);
+    margin-top: 6px;
+  }
+  .anti-circumvent {
+    background: var(--loam);
+    color: var(--paper);
+    padding: 50px;
+    margin-top: 50px;
+    border-left: 6px solid var(--rust);
+    max-width: 1100px;
+  }
+  .anti-circumvent .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--harvest);
+    margin-bottom: 14px;
+  }
+  .anti-circumvent h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin-bottom: 22px;
+  }
+  .anti-circumvent p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--paper-deep);
+    max-width: 800px;
+  }
+  .anti-circumvent p + p { margin-top: 14px; }
+
+  .scenario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 36px;
+    border: 1px solid var(--rule);
+  }
+  .scenario > div { padding: 36px; }
+  .scenario .before { background: var(--paper-warm); border-right: 1px solid var(--rule); }
+  .scenario .after { background: var(--paper); }
+  .scenario .heading {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .scenario .before .heading { color: var(--rust); }
+  .scenario .after .heading { color: var(--sage-deep); }
+  .scenario h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--loam);
+    margin-bottom: 18px;
+    letter-spacing: -0.015em;
+  }
+  .scenario .calc {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--loam-soft);
+  }
+  .scenario .calc .highlight {
+    display: block;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dotted var(--rule);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  .scenario .before .calc .highlight { color: var(--rust); }
+  .scenario .after .calc .highlight { color: var(--sage-deep); }
+
+  /* ============ PROGRAMS PAGE — REFINED ============ */
+  /* Replaces the heavy black-card layout with an editorial accordion */
+
+  .programs-intro {
+    max-width: 720px;
+    margin: 0 0 50px;
+    font-size: 17.5px;
+    line-height: 1.65;
+    color: var(--loam-soft);
+  }
+  .programs-intro::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 3.4em;
+    font-weight: 600;
+    float: left;
+    line-height: 0.85;
+    margin: 4px 8px -4px 0;
+    color: var(--harvest-deep);
+  }
+
+  .titles-list {
+    border-top: 2px solid var(--loam);
+  }
+
+  .title-item {
+    border-bottom: 1px solid var(--rule-light);
+    transition: background 0.2s;
+  }
+  .title-item:last-child { border-bottom: 2px solid var(--loam); }
+  .title-item.open { background: var(--paper-cover); }
+
+  .title-item-header {
+    display: grid;
+    grid-template-columns: 110px 1fr 2fr 40px;
+    gap: 32px;
+    align-items: center;
+    padding: 28px 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    transition: padding 0.2s;
+  }
+  .title-item-header:hover { background: rgba(200,151,50,0.04); }
+  .title-item.open .title-item-header { padding-bottom: 14px; }
+
+  .title-item-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--harvest-deep);
+    text-transform: uppercase;
+  }
+
+  .title-item-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--loam);
+  }
+  .title-item-name em {
+    font-style: italic;
+    color: var(--harvest-deep);
+    font-weight: 500;
+  }
+
+  .title-item-tagline {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--loam-soft);
+  }
+
+  .title-item-toggle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    color: var(--harvest-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 300;
+    transition: all 0.3s;
+    background: var(--paper);
+    justify-self: end;
+  }
+  .title-item.open .title-item-toggle {
+    background: var(--harvest);
+    border-color: var(--harvest);
+    color: var(--loam);
+    transform: rotate(45deg);
+  }
+
+  .title-item-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .title-item.open .title-item-body { max-height: 1400px; }
+
+  .title-item-content {
+    padding: 8px 16px 44px;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 32px;
+  }
+
+  .title-item-content > div:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    color: var(--sage-deep);
+    text-transform: uppercase;
+    padding-top: 4px;
+  }
+
+  .title-detail {
+    max-width: 720px;
+  }
+
+  .title-detail p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--loam);
+    margin-bottom: 22px;
+  }
+  .title-detail p:last-child { margin-bottom: 0; }
+
+  .title-provisions {
+    margin-top: 24px;
+    border-top: 1px dotted var(--rule);
+    padding-top: 20px;
+  }
+  .title-provisions h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 14px;
+  }
+  .title-provisions dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 12px 24px;
+    align-items: baseline;
+  }
+  .title-provisions dt {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--harvest-deep);
+    font-style: italic;
+    white-space: nowrap;
+  }
+  .title-provisions dd {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--loam-soft);
+  }
+  .title-provisions dd strong { color: var(--loam); font-weight: 600; }
+
+  /* Stack / examples row */
+  .stack-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+    margin-top: 30px;
+  }
+  .stack-cell {
+    padding: 40px 32px;
+    border-right: 1px solid var(--rule-light);
+  }
+  .stack-cell:last-child { border-right: none; }
+  .stack-icon { width: 48px; height: 48px; margin-bottom: 22px; }
+  .stack-icon svg { width: 100%; height: 100%; stroke: var(--sage-deep); fill: none; stroke-width: 1.5; }
+  .stack-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--harvest-deep);
+    margin-bottom: 8px;
+  }
+  .stack-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--loam);
+    margin-bottom: 14px;
+  }
+  .stack-desc {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--loam-soft);
+    margin-bottom: 20px;
+  }
+  .stack-calc {
+    border-top: 1px dotted var(--rule);
+    padding-top: 16px;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .stack-calc strong {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--loam);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .stack-calc .amount { color: var(--rust); font-weight: 600; }
+
+  .diversity-table {
+    margin-top: 30px;
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+  }
+  .div-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 240px 140px;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule-light);
+    align-items: center;
+  }
+  .div-row:last-child { border-bottom: none; }
+  .div-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--harvest);
+    line-height: 1;
+    text-align: center;
+  }
+  .div-label {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--loam);
+  }
+  .div-detail {
+    font-size: 14px;
+    color: var(--loam-soft);
+    font-style: italic;
+  }
+  .div-bonus {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--sage-deep);
+    text-align: right;
+    letter-spacing: -0.02em;
+  }
+  .div-bonus.zero { color: var(--rule); }
+
+  /* ============ URBAN PAGE ============ */
+  .urban-hero {
+    background: linear-gradient(180deg, var(--loam) 0%, var(--loam-soft) 100%);
+    color: var(--paper);
+    padding: 80px 8% 70px;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .urban-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image:
+      linear-gradient(var(--harvest) 1px, transparent 1px),
+      linear-gradient(90deg, var(--harvest) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .urban-hero-inner {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .urban-hero .page-eyebrow { color: var(--harvest); }
+  .urban-hero .page-title {
+    color: var(--paper);
+    font-variation-settings: "opsz" 144;
+  }
+  .urban-hero .page-title em { color: var(--harvest); }
+  .urban-hero .page-deck { color: var(--paper-deep); }
+
+  .vertical-illustration {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .illustration-art { height: 320px; position: relative; }
+  .illustration-art svg { width: 100%; height: 100%; }
+  .illustration-text {
+    color: var(--paper-deep);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .illustration-text strong {
+    color: var(--harvest);
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 14px;
+    letter-spacing: -0.015em;
+  }
+
+  .provisions {
+    margin-top: 30px;
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+  }
+  .provision-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 380px;
+    gap: 36px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule-light);
+    align-items: start;
+  }
+  .provision-row:last-child { border-bottom: none; }
+  .prov-section {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--harvest-deep);
+    font-weight: 600;
+  }
+  .prov-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--loam);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-bottom: 10px;
+  }
+  .prov-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--loam-soft);
+  }
+  .prov-detail {
+    background: var(--paper-warm);
+    border-left: 3px solid var(--harvest);
+    padding: 18px 22px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--loam);
+  }
+  .prov-detail strong {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--harvest-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .case-study {
+    background: var(--loam);
+    color: var(--paper);
+    padding: 50px;
+    border-left: 6px solid var(--harvest);
+    margin-top: 50px;
+    max-width: 1100px;
+  }
+  .case-study .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--harvest);
+    margin-bottom: 14px;
+  }
+  .case-study h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+    margin-bottom: 22px;
+  }
+  .case-study h3 em { font-style: italic; color: var(--harvest); }
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    margin-top: 30px;
+    border-top: 1px solid rgba(245,241,232,0.2);
+  }
+  .case-cell {
+    padding: 24px 28px;
+    border-right: 1px solid rgba(245,241,232,0.15);
+    border-bottom: 1px solid rgba(245,241,232,0.15);
+  }
+  .case-cell:nth-child(2n) { border-right: none; }
+  .case-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .case-cell .h {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--harvest);
+    margin-bottom: 10px;
+  }
+  .case-cell .v {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--paper);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+  .case-cell .v small {
+    display: block;
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    color: var(--paper-deep);
+    margin-top: 6px;
+    font-style: italic;
+    font-weight: 400;
+  }
+  .case-total {
+    margin-top: 24px;
+    padding: 24px 28px;
+    background: var(--harvest);
+    color: var(--loam);
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .conditions {
+    background: var(--paper-warm);
+    padding: 50px;
+    margin-top: 50px;
+    border-left: 4px solid var(--rust);
+  }
+  .conditions h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--loam);
+    margin-bottom: 24px;
+    letter-spacing: -0.015em;
+  }
+  .conditions ul { list-style: none; }
+  .conditions li {
+    padding: 14px 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--loam-soft);
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 8px;
+  }
+  .conditions li:last-child { border-bottom: none; }
+  .conditions li::before {
+    content: '✓';
+    color: var(--sage-deep);
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .conditions li.no::before { content: '✕'; color: var(--rust); }
+  .conditions li strong { color: var(--loam); font-weight: 600; }
+
+  /* ============ PROPOSAL PAGE ============ */
+  #panel-proposal { background: var(--paper-cover); }
+
+  .bill-cover {
+    background: var(--paper-cover);
+    padding: 80px 8% 60px;
+    border-bottom: 4px double var(--loam);
+    position: relative;
+  }
+  .bill-cover-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .congress-bar {
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+    padding: 14px 0;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--loam);
+  }
+  .congress-bar .center {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+  .congress-bar .left { text-align: right; }
+  .congress-bar .right { text-align: left; }
+  .bill-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(56px, 9vw, 110px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--loam);
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 12px;
+  }
+  .bill-num em {
+    font-style: italic;
+    color: var(--harvest-deep);
+    font-weight: 600;
+  }
+  .bill-subnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--loam-soft);
+    text-transform: uppercase;
+    margin-bottom: 60px;
+  }
+  .a-bill {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 36px);
+    color: var(--loam);
+    margin-bottom: 28px;
+    letter-spacing: 0.3em;
+  }
+  .bill-purpose {
+    font-family: 'Source Serif 4', serif;
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 720px;
+    margin: 0 auto 60px;
+    font-style: italic;
+  }
+  .ornament {
+    text-align: center;
+    margin: 30px 0;
+    color: var(--harvest-deep);
+    font-size: 16px;
+    letter-spacing: 24px;
+  }
+  .introduced-by {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--loam);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .introduced-by .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .toc {
+    background: #fbf8ee;
+    padding: 50px 8%;
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc-inner { max-width: 760px; margin: 0 auto; }
+  .toc-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--loam);
+    text-align: center;
+    margin-bottom: 32px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    letter-spacing: -0.015em;
+  }
+  .toc-list { list-style: none; }
+  .toc-list li {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 18px;
+    padding: 8px 0;
+    font-size: 15px;
+    align-items: baseline;
+  }
+  .toc-list li .roman {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--harvest-deep);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .toc-list li .label {
+    font-family: 'Fraunces', serif;
+    color: var(--loam);
+    font-weight: 500;
+    font-style: italic;
+    position: relative;
+    overflow: hidden;
+  }
+  .toc-list li .label::after {
+    content: '..............................................................................................';
+    color: var(--rule-light);
+    margin-left: 8px;
+    letter-spacing: 2px;
+  }
+  .toc-list li .pg {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--loam-soft);
+  }
+
+  .bill-body {
+    background: var(--paper-cover);
+    padding: 70px 8%;
+  }
+  .bill-body-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    font-family: 'Source Serif 4', serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink);
+    position: relative;
+  }
+  .preamble {
+    font-family: 'Source Serif 4', serif;
+    font-size: 17px;
+    line-height: 1.75;
+    margin-bottom: 50px;
+    padding: 30px 36px;
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+    background: #fbf8ee;
+  }
+  .preamble .smallcaps {
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    color: var(--loam);
+    font-weight: 600;
+  }
+  .title-heading {
+    text-align: center;
+    margin: 90px 0 40px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .title-heading:first-of-type { margin-top: 30px; }
+  .title-heading .roman {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--loam);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .title-heading h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    color: var(--loam);
+  }
+  .title-heading h2 em { font-style: italic; color: var(--harvest-deep); }
+  .bill-section { margin: 44px 0 18px; }
+  .bill-section .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--rust);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .bill-section h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--loam);
+    font-style: italic;
+  }
+  .bill-body-inner p { margin-bottom: 16px; text-indent: 0; }
+  .bill-body-inner p.indent { margin-left: 28px; text-indent: -16px; }
+  .bill-body-inner p.indent-2 { margin-left: 56px; text-indent: -16px; }
+  .bill-body-inner strong { font-weight: 600; color: var(--loam); }
+  .bill-body-inner em { font-style: italic; }
+  .stat-edit {
+    margin: 22px 0;
+    padding: 18px 24px;
+    background: #fdfbf3;
+    border-left: 3px solid var(--harvest);
+    font-family: 'Source Serif 4', serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .stat-edit .strike {
+    text-decoration: line-through;
+    text-decoration-color: var(--rust);
+    text-decoration-thickness: 2px;
+    color: var(--rust);
+    background: rgba(168, 69, 31, 0.08);
+    padding: 0 3px;
+  }
+  .stat-edit .add {
+    color: var(--sage-deep);
+    background: rgba(92, 107, 60, 0.10);
+    padding: 0 3px;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--sage-deep);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  .stat-edit .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--harvest-deep);
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .findings {
+    counter-reset: finding;
+    list-style: none;
+    margin: 24px 0;
+    padding: 0;
+  }
+  .findings li {
+    counter-increment: finding;
+    padding-left: 60px;
+    margin-bottom: 18px;
+    position: relative;
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+  .findings li::before {
+    content: "(" counter(finding) ")";
+    position: absolute;
+    left: 0; top: 0;
+    font-weight: 600;
+    color: var(--loam);
+    font-size: 15.5px;
+  }
+  .definitions {
+    margin: 24px 0;
+    padding: 26px 32px;
+    background: #fbf8ee;
+    border: 1px solid var(--rule-light);
+  }
+  .definitions dt {
+    font-variant: small-caps;
+    font-weight: 600;
+    color: var(--loam);
+    margin-top: 16px;
+    letter-spacing: 0.04em;
+    font-size: 15.5px;
+  }
+  .definitions dt:first-child { margin-top: 0; }
+  .definitions dd {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: 6px;
+    margin-left: 0;
+    padding-left: 22px;
+    border-left: 2px solid var(--rule-light);
+  }
+  .schedule {
+    margin: 24px 0;
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+  }
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule-light);
+    align-items: baseline;
+  }
+  .schedule-row:last-child { border-bottom: none; }
+  .schedule-when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--harvest-deep);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .schedule-what {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--loam);
+  }
+  .signature-block {
+    margin-top: 100px;
+    padding-top: 60px;
+    border-top: 4px double var(--loam);
+    text-align: center;
+  }
+  .sig-attest {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--loam);
+    max-width: 600px;
+    margin: 0 auto 50px;
+  }
+  .seal-stamp {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto 50px;
+  }
+  .seal-stamp svg { width: 110px; height: 110px; }
+  .sig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px 80px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .sig-line {
+    border-bottom: 1px solid var(--loam);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+    height: 60px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--rule);
+    font-weight: 400;
+  }
+  .sig-cap {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--loam-soft);
+  }
+  .sig-cap small {
+    display: block;
+    margin-top: 4px;
+    font-style: italic;
+    font-family: 'Source Serif 4', serif;
+    font-size: 12px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--loam-soft);
+  }
+  .filed-text {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--loam-soft);
+    margin-top: 40px;
+    padding-bottom: 30px;
+  }
+  .draft-watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-25deg);
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 280px;
+    color: rgba(168, 69, 31, 0.04);
+    letter-spacing: -0.04em;
+    pointer-events: none;
+    z-index: 1;
+    user-select: none;
+    display: none;
+  }
+  #panel-proposal.active ~ .draft-watermark,
+  body.on-proposal .draft-watermark {
+    display: block;
+  }
+
+  /* ============ REGENERATIVE TRANSITION PAGE ============ */
+  .regen-thesis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 30px;
+  }
+  .regen-thesis-text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--loam-soft);
+  }
+  .regen-thesis-text p { margin-bottom: 18px; }
+  .regen-thesis-text p::first-letter,
+  .regen-thesis-text p:first-child::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 3.6em;
+    font-weight: 600;
+    float: left;
+    line-height: 0.85;
+    margin: 4px 8px -4px 0;
+    color: var(--harvest-deep);
+  }
+  /* Only first paragraph gets the drop cap */
+  .regen-thesis-text p:not(:first-child)::first-letter {
+    all: unset;
+  }
+
+  .regen-pullstats {
+    background: var(--paper-warm);
+    border-left: 4px solid var(--sage);
+    padding: 36px;
+  }
+  .regen-pullstats h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 22px;
+  }
+  .regen-pullstats .stat-line {
+    padding: 16px 0;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .regen-pullstats .stat-line:last-child { border-bottom: none; }
+  .regen-pullstats .stat-line:first-of-type { padding-top: 0; }
+  .regen-pullstats .stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 32px;
+    color: var(--loam);
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+  .regen-pullstats .stat-num em {
+    font-style: italic;
+    color: var(--sage-deep);
+    font-weight: 600;
+  }
+  .regen-pullstats .stat-text {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--loam-soft);
+    font-style: italic;
+  }
+
+  /* Transition timeline */
+  .timeline {
+    margin-top: 40px;
+    position: relative;
+    padding: 20px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 80px;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rust) 0%, var(--rust) 25%, var(--harvest) 50%, var(--sage) 75%, var(--sage-deep) 100%);
+  }
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .timeline-stage {
+    text-align: center;
+    padding: 0 12px;
+  }
+  .timeline-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--harvest-deep);
+    font-weight: 600;
+    margin-bottom: 14px;
+    height: 20px;
+  }
+  .timeline-marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--loam);
+    margin: 0 auto 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .timeline-marker.active { background: var(--harvest); border-color: var(--harvest-deep); }
+  .timeline-marker.complete { background: var(--sage); border-color: var(--sage-deep); }
+  .timeline-stage h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--loam);
+    margin-bottom: 10px;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  .timeline-stage p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--loam-soft);
+  }
+  .timeline-stage .cost-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .timeline-stage .cost-tag.expense { background: rgba(168,69,31,0.12); color: var(--rust); }
+  .timeline-stage .cost-tag.break-even { background: rgba(200,151,50,0.18); color: var(--harvest-deep); }
+  .timeline-stage .cost-tag.savings { background: rgba(92,107,60,0.15); color: var(--sage-deep); }
+
+  /* Cost curve illustration */
+  .cost-curve {
+    background: var(--loam);
+    color: var(--paper);
+    padding: 50px;
+    margin-top: 50px;
+    border-left: 6px solid var(--sage);
+  }
+  .cost-curve .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--harvest);
+    margin-bottom: 14px;
+  }
+  .cost-curve h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--paper);
+    margin-bottom: 28px;
+    max-width: 760px;
+  }
+  .cost-curve h3 em { font-style: italic; color: var(--harvest); }
+  .cost-curve-art {
+    margin: 30px 0 24px;
+  }
+  .cost-curve-art svg {
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+    margin: 0 auto;
+  }
+  .cost-curve-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(245,241,232,0.15);
+  }
+  .cost-curve-legend .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper-deep);
+  }
+  .cost-curve-legend .swatch {
+    width: 28px;
+    height: 3px;
+  }
+  .cost-curve-legend .swatch.input { background: var(--rust); }
+  .cost-curve-legend .swatch.support { background: var(--harvest); }
+  .cost-curve-legend .swatch.net { background: var(--sage); }
+
+  /* Practice cards */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    margin-top: 30px;
+    border-top: 2px solid var(--loam);
+    border-bottom: 2px solid var(--loam);
+  }
+  .practice {
+    padding: 36px 32px;
+    border-right: 1px solid var(--rule-light);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .practice:nth-child(2n) { border-right: none; }
+  .practice:nth-last-child(-n+2):not(:nth-child(2n) ~ *) { border-bottom: none; }
+  .practice:last-child, .practice:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+
+  .practice-icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 18px;
+  }
+  .practice-icon svg { width: 100%; height: 100%; stroke: var(--sage-deep); fill: none; stroke-width: 1.5; }
+
+  .practice-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--harvest-deep);
+    margin-bottom: 8px;
+  }
+  .practice-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--loam);
+    margin-bottom: 14px;
+  }
+  .practice-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--loam-soft);
+    margin-bottom: 20px;
+  }
+  .practice-detail {
+    border-top: 1px dotted var(--rule);
+    padding-top: 16px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .practice-detail dt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    font-weight: 600;
+    white-space: nowrap;
+    align-self: center;
+  }
+  .practice-detail dd {
+    color: var(--loam);
+    align-self: center;
+  }
+  .practice-detail dd strong { color: var(--harvest-deep); font-weight: 600; }
+
+  /* Bridge program callout */
+  .bridge-program {
+    background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-deep) 100%);
+    padding: 50px;
+    margin-top: 50px;
+    border-left: 6px solid var(--harvest);
+  }
+  .bridge-program .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--harvest-deep);
+    margin-bottom: 14px;
+  }
+  .bridge-program h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--loam);
+    margin-bottom: 22px;
+  }
+  .bridge-program h3 em { font-style: italic; color: var(--harvest-deep); }
+  .bridge-program > p {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--loam-soft);
+    max-width: 800px;
+    margin-bottom: 28px;
+  }
+  .bridge-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 30px;
+    border-top: 1px solid var(--rule);
+  }
+  .bridge-feature {
+    padding: 24px 20px;
+    border-right: 1px solid var(--rule-light);
+  }
+  .bridge-feature:last-child { border-right: none; }
+  .bridge-feature .num {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 30px;
+    color: var(--loam);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .bridge-feature .num em { font-style: italic; color: var(--harvest-deep); }
+  .bridge-feature .name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--loam);
+    margin-bottom: 6px;
+  }
+  .bridge-feature p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--loam-soft);
+  }
+
+  /* Case study quote */
+  .farmer-quote {
+    background: var(--paper);
+    padding: 50px;
+    margin-top: 50px;
+    border: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 40px;
+    align-items: center;
+  }
+  .farmer-quote-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--loam);
+    letter-spacing: -0.01em;
+  }
+  .farmer-quote-text::before {
+    content: '"';
+    font-family: 'Fraunces', serif;
+    font-size: 60px;
+    color: var(--harvest);
+    line-height: 0.5;
+    margin-right: 4px;
+    vertical-align: -0.15em;
+  }
+  .farmer-quote-attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    border-left: 2px solid var(--harvest);
+    padding-left: 18px;
+    line-height: 1.7;
+  }
+  .farmer-quote-attr strong {
+    font-family: 'Fraunces', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    color: var(--loam);
+    text-transform: none;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ============ DIRECT GRANT PROGRAM ============ */
+  .grant-callout {
+    background: var(--paper);
+    border: 2px solid var(--harvest);
+    padding: 50px;
+    margin-top: 50px;
+    max-width: 1100px;
+    position: relative;
+  }
+  .grant-callout::before {
+    content: 'NEW — Added from Farmer Feedback';
+    position: absolute;
+    top: -12px; left: 24px;
+    background: var(--harvest);
+    color: var(--loam);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 2px 12px;
+  }
+  .grant-callout .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--harvest-deep);
+    margin-bottom: 14px;
+  }
+  .grant-callout h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--loam);
+    margin-bottom: 10px;
+  }
+  .grant-callout h3 em { font-style: italic; color: var(--harvest-deep); }
+  .grant-callout .sub {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--loam-soft);
+    margin-bottom: 28px;
+    max-width: 760px;
+    line-height: 1.6;
+  }
+
+  .grant-key-fact {
+    background: var(--loam);
+    color: var(--paper);
+    padding: 22px 28px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+  .grant-key-fact .big {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 48px;
+    color: var(--harvest);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+  .grant-key-fact .desc {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--paper-deep);
+  }
+  .grant-key-fact .desc strong { color: var(--paper); font-weight: 600; }
+
+  .grant-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    margin-top: 24px;
+  }
+  .grant-item {
+    padding: 20px 20px;
+    border-right: 1px solid var(--rule-light);
+    border-bottom: 1px solid var(--rule-light);
+  }
+  .grant-item:nth-child(3n) { border-right: none; }
+  .grant-item:nth-last-child(-n+3) { border-bottom: none; }
+  .grant-item-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .grant-item-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--loam);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .grant-item-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--loam-soft);
+  }
+
+  .grant-how {
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: var(--paper-warm);
+    border-left: 3px solid var(--sage);
+  }
+  .grant-how .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .grant-how p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--loam);
+  }
+  .grant-how p + p { margin-top: 10px; }
+
+  .floor-callout {
+    background: var(--paper-warm);
+    border: 2px solid var(--sage);
+    padding: 36px 40px;
+    margin-top: 36px;
+    max-width: 1100px;
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .floor-callout::before {
+    content: 'NEW — Added from Farmer Feedback';
+    position: absolute;
+    top: -12px; left: 24px;
+    background: var(--sage);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 2px 12px;
+  }
+  .floor-callout .floor-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 80px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--sage-deep);
+    font-variation-settings: "opsz" 144;
+    white-space: nowrap;
+  }
+  .floor-callout h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--loam);
+    letter-spacing: -0.015em;
+    margin-bottom: 10px;
+  }
+  .floor-callout p {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--loam-soft);
+  }
+
+  @media (max-width: 960px) {
+    .grant-items { grid-template-columns: 1fr 1fr; }
+    .grant-item:nth-child(3n) { border-right: 1px solid var(--rule-light); }
+    .grant-item:nth-child(2n) { border-right: none; }
+    .floor-callout { grid-template-columns: 1fr; gap: 16px; }
+    .floor-callout .floor-num { font-size: 56px; }
+    .grant-callout { padding: 36px 24px; }
+  }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-lead { grid-column: 1; }
+    .pillars { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1px solid var(--rule-light); }
+    .pillar:last-child { border-bottom: none; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2n) { border-right: none; }
+    .stat:nth-child(-n+2) { border-bottom: 1px solid rgba(245,241,232,0.15); }
+    .compare-row { grid-template-columns: 1fr; }
+    .compare-cell { border-left: none; border-top: 1px solid var(--rule-light); }
+    .compare-cell:first-child { border-top: none; }
+    .deep-dive { padding: 32px 24px; }
+    .number-feature { grid-template-columns: 1fr; gap: 24px; }
+    .tier-row { grid-template-columns: 1fr; gap: 16px; padding: 32px 0; }
+    .anti-circumvent { padding: 32px 24px; }
+    .scenario { grid-template-columns: 1fr; }
+    .scenario .before { border-right: none; border-bottom: 1px solid var(--rule); }
+    .title-item-header { grid-template-columns: 90px 1fr 30px; gap: 16px; }
+    .title-item-tagline { grid-column: 1 / 4; padding-top: 12px; padding-left: 0; }
+    .title-item-content { grid-template-columns: 1fr; gap: 16px; }
+    .stack-row { grid-template-columns: 1fr; }
+    .stack-cell { border-right: none; border-bottom: 1px solid var(--rule-light); }
+    .div-row { grid-template-columns: 60px 1fr; gap: 16px; }
+    .div-row > .div-detail, .div-row > .div-bonus { grid-column: 1 / 3; text-align: left; padding-left: 76px; }
+    .vertical-illustration { grid-template-columns: 1fr; gap: 30px; }
+    .illustration-art { height: 240px; }
+    .provision-row { grid-template-columns: 1fr; gap: 16px; }
+    .case-study { padding: 32px 24px; }
+    .case-grid { grid-template-columns: 1fr; }
+    .case-cell { border-right: none; }
+    .conditions { padding: 32px 24px; }
+    .colophon-grid { grid-template-columns: 1fr 1fr; }
+    .section-header { grid-template-columns: 1fr; gap: 8px; }
+    .section { padding: 50px 6% 50px; }
+    .page-header { padding: 40px 6% 36px; }
+    .stats-bar { padding: 40px 6%; }
+    .colophon { padding: 50px 6% 25px; }
+    .nav-inner { padding: 0 4%; }
+    .nav button { padding: 14px 16px; font-size: 13.5px; }
+    .nav button.proposal-link { margin-left: 0; }
+    .pull-quote { padding: 40px 28px; margin: 50px auto; }
+    .page-foot-inner { grid-template-columns: 1fr; }
+    .page-foot button.next { text-align: left; }
+    .page-foot { padding: 40px 6%; }
+    .bill-cover { padding: 50px 6% 40px; }
+    .bill-body { padding: 50px 6%; }
+    .toc { padding: 40px 6%; }
+    .preamble { padding: 22px 24px; }
+    .sig-grid { grid-template-columns: 1fr; gap: 40px; }
+    .draft-watermark { font-size: 140px; }
+    .stat-edit { padding: 14px 18px; }
+    .schedule-row { grid-template-columns: 1fr; gap: 4px; }
+    .toc-list li { grid-template-columns: 60px 1fr auto; gap: 12px; }
+    .regen-thesis { grid-template-columns: 1fr; gap: 32px; }
+    .timeline-grid { grid-template-columns: 1fr; gap: 32px; }
+    .timeline::before { display: none; }
+    .timeline-marker { display: none; }
+    .timeline-stage { text-align: left; padding-left: 16px; border-left: 3px solid var(--harvest); }
+    .timeline-year { height: auto; margin-bottom: 8px; }
+    .cost-curve { padding: 32px 24px; }
+    .practice-grid { grid-template-columns: 1fr; }
+    .practice { border-right: none; }
+    .bridge-program { padding: 32px 24px; }
+    .bridge-features { grid-template-columns: 1fr; }
+    .bridge-feature { border-right: none; border-bottom: 1px dotted var(--rule); }
+    .bridge-feature:last-child { border-bottom: none; }
+    .farmer-quote { grid-template-columns: 1fr; gap: 24px; padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR ============ -->
+<div class="topbar">
+  <span class="topbar-left">⬢ 119th Congress · Discussion Draft</span>
+  <span class="topbar-right" id="topbar-page">Volume I · Spring 2026</span>
+</div>
+
+<!-- ============ BRANDBAR ============ -->
+<div class="brandbar">
+  <a class="brand" data-tab="overview">
+    <span class="brand-mark"></span>
+    The Fair Farms Act <small>· of 2026</small>
+  </a>
+  <div class="brandbar-meta">A working reform proposal</div>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button data-tab="overview" class="active"><span class="num">I</span> Overview</button>
+    <button data-tab="problem"><span class="num">II</span> The Problem</button>
+    <button data-tab="tiers"><span class="num">III</span> Tier System</button>
+    <button data-tab="programs"><span class="num">IV</span> Programs</button>
+    <button data-tab="regenerative"><span class="num">V</span> Regenerative Transition</button>
+    <button data-tab="urban"><span class="num">VI</span> Urban Harvest</button>
+    <button data-tab="proposal" class="proposal-link"><span class="num">VII</span> The Full Proposal</button>
+  </div>
+</nav>
+
+<div class="draft-watermark">DRAFT</div>
+
+<main>
+
+<!-- ============ TAB: OVERVIEW ============ -->
+<section class="tab-panel active" id="panel-overview">
+
+<section class="hero-overview">
+  <div class="hero-grid">
+    <div class="hero-lead">
+      <h1 class="masthead-title">A new <em>contract</em><br>with the land.</h1>
+      <p class="hero-deck">For ninety years, the federal farm program has rewarded scale over stewardship. The Fair Farms Act is a complete restructuring — capping payments at the operation level regardless of legal structure, redirecting support to producers who actually need it, tying subsidies to ecological outcomes, and opening a new track for urban food infrastructure. What follows is the working draft.</p>
+    </div>
+    <aside class="hero-meta">
+      <dl>
+        <dt>Status</dt><dd>Discussion draft for circulation</dd>
+        <dt>Replaces</dt><dd>Title I, Agriculture Improvement Act of 2018; commodity provisions of OBBBA 2025</dd>
+        <dt>Authority</dt><dd>Amends 7 U.S.C. §§ 1308, 1308–1, 1501 et seq., 9011 et seq.</dd>
+        <dt>Effective</dt><dd>Crop Year 2027 (phased)</dd>
+        <dt>CBO Score</dt><dd>$0 to –$8B over 10 years (net deficit reduction)</dd>
+      </dl>
+    </aside>
+
+    <div class="hero-art">
+      <svg viewBox="0 0 1100 180" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="120" x2="1100" y2="120" stroke="#8b7355" stroke-width="1"/>
+        <line x1="0" y1="124" x2="1100" y2="124" stroke="#8b7355" stroke-width="0.5"/>
+        <circle cx="550" cy="90" r="40" fill="none" stroke="#8b6914" stroke-width="1"/>
+        <circle cx="550" cy="90" r="28" fill="none" stroke="#c89732" stroke-width="0.8"/>
+        <circle cx="550" cy="90" r="6" fill="#c89732"/>
+        <g stroke="#c89732" stroke-width="0.8" opacity="0.6">
+          <line x1="550" y1="40" x2="550" y2="50"/>
+          <line x1="550" y1="130" x2="550" y2="140"/>
+          <line x1="500" y1="90" x2="510" y2="90"/>
+          <line x1="590" y1="90" x2="600" y2="90"/>
+          <line x1="515" y1="55" x2="522" y2="62"/>
+          <line x1="578" y1="118" x2="585" y2="125"/>
+          <line x1="585" y1="55" x2="578" y2="62"/>
+          <line x1="515" y1="125" x2="522" y2="118"/>
+        </g>
+        <g stroke="#8b6914" stroke-width="1" fill="none">
+          <path d="M 100 160 Q 100 130 100 100"/>
+          <ellipse cx="100" cy="100" rx="3" ry="6" fill="#c89732" stroke="none"/>
+          <path d="M 96 105 L 92 102 M 104 105 L 108 102 M 96 95 L 92 92 M 104 95 L 108 92"/>
+          <path d="M 130 160 Q 130 132 130 105"/>
+          <ellipse cx="130" cy="105" rx="3" ry="6" fill="#c89732" stroke="none"/>
+          <path d="M 126 110 L 122 107 M 134 110 L 138 107 M 126 100 L 122 97 M 134 100 L 138 97"/>
+          <path d="M 160 160 Q 160 128 160 95"/>
+          <ellipse cx="160" cy="95" rx="3" ry="6" fill="#c89732" stroke="none"/>
+          <path d="M 156 100 L 152 97 M 164 100 L 168 97 M 156 90 L 152 87 M 164 90 L 168 87"/>
+        </g>
+        <g stroke="#8b6914" stroke-width="1" fill="none">
+          <path d="M 940 160 Q 940 128 940 95"/>
+          <ellipse cx="940" cy="95" rx="3" ry="6" fill="#c89732" stroke="none"/>
+          <path d="M 936 100 L 932 97 M 944 100 L 948 97 M 936 90 L 932 87 M 944 90 L 948 87"/>
+          <path d="M 970 160 Q 970 132 970 105"/>
+          <ellipse cx="970" cy="105" rx="3" ry="6" fill="#c89732" stroke="none"/>
+          <path d="M 966 110 L 962 107 M 974 110 L 978 107 M 966 100 L 962 97 M 974 100 L 978 97"/>
+          <path d="M 1000 160 Q 1000 130 1000 100"/>
+          <ellipse cx="1000" cy="100" rx="3" ry="6" fill="#c89732" stroke="none"/>
+          <path d="M 996 105 L 992 102 M 1004 105 L 1008 102 M 996 95 L 992 92 M 1004 95 L 1008 92"/>
+        </g>
+        <g stroke="#8b7355" stroke-width="0.4" opacity="0.5">
+          <path d="M 200 130 Q 400 132 500 132"/>
+          <path d="M 600 132 Q 700 132 900 130"/>
+          <path d="M 200 140 Q 400 142 500 142"/>
+          <path d="M 600 142 Q 700 142 900 140"/>
+          <path d="M 200 150 Q 400 152 500 152"/>
+          <path d="M 600 152 Q 700 152 900 150"/>
+        </g>
+        <g stroke="#3d4a26" stroke-width="0.8" fill="none">
+          <rect x="850" y="80" width="20" height="40"/>
+          <line x1="855" y1="85" x2="855" y2="115"/>
+          <line x1="860" y1="85" x2="860" y2="115"/>
+          <line x1="865" y1="85" x2="865" y2="115"/>
+          <line x1="850" y1="92" x2="870" y2="92"/>
+          <line x1="850" y1="100" x2="870" y2="100"/>
+          <line x1="850" y1="108" x2="870" y2="108"/>
+        </g>
+        <g fill="#8b6914">
+          <circle cx="540" cy="155" r="1.5"/>
+          <circle cx="550" cy="155" r="1.5"/>
+          <circle cx="560" cy="155" r="1.5"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="stats-title">·  The Problem in Four Figures  ·</div>
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-fig">4<sup>%</sup></div>
+      <div class="stat-label">of U.S. farms produce 48% of the value of agricultural production</div>
+    </div>
+    <div class="stat">
+      <div class="stat-fig">⅔</div>
+      <div class="stat-label">of ARC, PLC, and crop insurance payments collected by the largest 10% of farms</div>
+    </div>
+    <div class="stat">
+      <div class="stat-fig">$1.2<sup>M</sup></div>
+      <div class="stat-label">average annual premium subsidy to a single high-AGI recipient (GAO, 2015)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-fig">0</div>
+      <div class="stat-label">payment limit on federal crop insurance premium subsidies under current law</div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">i</div>
+      <div>
+        <span class="section-eyebrow">The Three Pillars · How the Bill Works</span>
+        <h2 class="section-title">A complete restructuring built around three principles.</h2>
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-roman">I.</div>
+        <div class="pillar-name">Cap by operation, not by entity.</div>
+        <p class="pillar-desc">The "(except a joint venture or general partnership)" carve-out at 7 U.S.C. § 1308(b) is struck. Payment limits attach to the farming operation, with full attribution through unlimited ownership layers. The 2014 Farm Bill family exemption is repealed. A 1,000-hour active-engagement test applies uniformly. Restructuring as a partnership, LLC, or trust no longer multiplies the cap.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-roman">II.</div>
+        <div class="pillar-name">Pay for stewardship, not volume.</div>
+        <p class="pillar-desc">Base acres sunset over five years. ARC and PLC are replaced with practice-based payments tied to cover cropping, rotation diversity, soil organic matter, and habitat. A diversification index rewards farms that grow more than two crops. The narrower the portfolio, the smaller the support — flipping the historical incentive structure entirely.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-roman">III.</div>
+        <div class="pillar-name">A new track for the cities.</div>
+        <p class="pillar-desc">Title VII opens a parallel program for controlled-environment and vertical agriculture sited in food-access priority tracts. Industrial-scale capital that gets capped out of Title I commodity support has somewhere productive to go: 40% construction credits for urban facilities, federal procurement guarantees, and conditions on renewable power and living wages.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pull-quote reveal">
+  <p>The shape of the American countryside is not destiny. It is the precipitate of the choices Congress makes about who gets a check.</p>
+  <cite>— § 101, Findings &amp; Purpose</cite>
+</div>
+
+<footer class="page-foot">
+  <div class="page-foot-inner">
+    <button data-tab="proposal" style="grid-column: 1 / 3; text-align: center; padding: 32px 0;">
+      <span class="label">Begin Reading →</span>
+      <span class="target">Page II · The Problem</span>
+    </button>
+  </div>
+</footer>
+
+</section>
+
+<!-- ============ TAB: PROBLEM ============ -->
+<section class="tab-panel" id="panel-problem">
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Page II · Diagnosis</div>
+    <h1 class="page-title">How $44 billion a year ends up in fewer than <em>four thousand</em> hands.</h1>
+    <p class="page-deck">The federal farm program does not become unequal by accident. Each of the mechanisms below is encoded in statute — sometimes by name, sometimes by a single parenthetical buried in a sub-paragraph. Six provisions, working together, produce the concentration the entire system is critiqued for.</p>
+  </div>
+</header>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <span class="section-eyebrow">Six Statutory Provisions · Six Distortions</span>
+        <h2 class="section-title">The mechanisms of capture, side by side with their replacements.</h2>
+      </div>
+    </div>
+    <div class="compare">
+      <div class="compare-row header">
+        <div>Statutory Provision</div>
+        <div>Current Effect</div>
+        <div>Fair Farms Replacement</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">The "except" clause<span class="citation">7 U.S.C. § 1308(b)</span></div>
+        <div class="compare-cell before"><strong>Multiplies caps via partnerships</strong>General partnerships and joint ventures escape entity-level limits; each partner gets a separate $155,000 cap. A 5-partner GP collects $775,000 instead of $155,000.</div>
+        <div class="compare-cell after"><strong>Single cap per operation</strong>Payment limits attach to the farming operation, not the legal entity. Restructuring as a partnership, LLC, joint venture, or trust no longer multiplies the cap.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">"Active management"<span class="citation">7 U.S.C. § 1308–1(b)(2)(A)</span></div>
+        <div class="compare-cell before"><strong>Undefined management threshold</strong>"Active personal management" carries no quantifiable test. Absentee partners qualify by participating in phone calls or signing plans, enabling paper-partner schemes.</div>
+        <div class="compare-cell after"><strong>1,000-hour combined floor</strong>Statutory minimum of 1,000 hours of combined labor and management per year, on-site, documented. Applies uniformly to all participants regardless of family relationship.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Family exemption<span class="citation">2014 Farm Bill § 1604</span></div>
+        <div class="compare-cell before"><strong>Carves out 96% of farms</strong>Bars USDA from applying tightened active-engagement rules to family-member operations. Because most large farms are family-organized, the exemption swallows the rule.</div>
+        <div class="compare-cell after"><strong>Repealed in full</strong>Family relationship no longer affects payment eligibility. Tier-based caps replace family/non-family distinction with size-based protection of genuinely small operations.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Crop insurance secrecy<span class="citation">7 U.S.C. § 1502(c)</span></div>
+        <div class="compare-cell before"><strong>Recipient names hidden</strong>Premium subsidy recipients are statutorily confidential. Public has no visibility into who collects the largest single subsidy stream in the system.</div>
+        <div class="compare-cell after"><strong>Full transparency</strong>Recipient names, entity ownership chains, and subsidy amounts disclosed annually in a public database, harmonized with ARC/PLC reporting.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Uncapped insurance<span class="citation">7 U.S.C. § 1508(b)</span></div>
+        <div class="compare-cell before"><strong>No payment limit, no AGI test</strong>Premium subsidies have no cap and no income test. A billionaire farming 150,000 acres receives the same per-dollar subsidy rate as a 200-acre operator.</div>
+        <div class="compare-cell after"><strong>Sliding-scale subsidy by tier</strong>Premium subsidy rate scales inversely with operation size. Tier I receives 80% subsidy; Tier IV receives 35%. Hard cap of $125,000 per operation per year.</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">Base acres regime<span class="citation">7 U.S.C. § 9011 et seq.</span></div>
+        <div class="compare-cell before"><strong>Historical entitlement, decoupled</strong>Payments tied to historical plantings (often 30+ years old). Capitalizes into land prices, rewards landowners not farmers, and locks in commodity monoculture.</div>
+        <div class="compare-cell after"><strong>Practice-based payments</strong>Base acres sunset over 5 years. Replaced by payments tied to current farming practices: cover cropping, rotation diversity, soil organic matter, pollinator habitat, water quality.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pull-quote reveal">
+  <p>The federal government should not be in the business of writing million-dollar checks to operations that would be profitable without them, while the smallest 86 percent of farms scrape by on margins below ten percent.</p>
+  <cite>— Statement of Findings, § 102(a)</cite>
+</div>
+
+<section class="section section-warm reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <span class="section-eyebrow">Deep Dive · The Two Largest Distortions</span>
+        <h2 class="section-title">Two provisions do most of the structural damage.</h2>
+      </div>
+    </div>
+    <div class="deep-dive">
+      <div class="label">Distortion A · The Partnership Multiplier</div>
+      <h3>Six words in 7 U.S.C. § 1308(b) erase the payment cap for any operation willing to restructure.</h3>
+      <p>The statute reads: <em>"The total amount of payments received... by a person or legal entity (except a joint venture or general partnership) for any crop year... may not exceed $125,000."</em> That parenthetical is the entire game. A corporation, LLC, or limited partnership is itself capped. But a general partnership or joint venture is not — the cap attaches to each partner individually.</p>
+      <p>The mechanical result: a single 8,000-acre operation organized as an 8-person general partnership (operator, spouse, two adult children, sibling, two cousins, niece) collects up to $1.24 million in commodity payments where the same operation organized as a corporation would receive $155,000.</p>
+      <p>The OBBBA of 2025 made this worse by extending the multi-cap treatment to LLCs and pass-through entities. The Fair Farms Act strikes the parenthetical entirely — and applies the cap to the operation, looking through whatever legal shells sit between the cap and the ultimate beneficial owner.</p>
+    </div>
+    <div class="deep-dive">
+      <div class="label">Distortion B · The Family Carve-Out</div>
+      <h3>The 2014 Farm Bill § 1604 simultaneously told USDA to tighten the rules and forbade them from applying the new rules to family farms.</h3>
+      <p>When Congress directed USDA in 2014 to define "significant contribution of active personal management," it added a one-paragraph exemption: <em>"The Secretary shall not apply the regulations promulgated pursuant to subsection (a) to individuals or entities comprised solely of family members."</em></p>
+      <p>Because the statute defines "family member" expansively — lineal ancestors and descendants, siblings, spouses, first cousins, nieces, nephews, plus everyone "by marriage" — and because 96% of U.S. farms are organized as family operations, the exemption swallows the rule. A family-member general partnership with eight adult relatives spread across three states can run an 8,000-acre operation while qualifying every member as "actively engaged" with no on-site presence required.</p>
+      <p>The Fair Farms Act repeals § 1604 in full. Family relationship has no bearing on payment eligibility. Genuinely small family farms are protected by the Tier I designation — by their actual size — not by the legal status of who they're related to.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <span class="section-eyebrow">Profitability · The Numbers Behind the Subsidies</span>
+        <h2 class="section-title">The largest farms aren't struggling. They're highly profitable — before subsidies.</h2>
+      </div>
+    </div>
+    <div class="number-feature">
+      <div class="number">51<sup>%</sup></div>
+      <div class="desc">of large family farms (GCFI $1M–$5M) report operating profit margins above 25%, the level USDA classifies as "low financial risk."<small>USDA ERS · 2022 ARMS Survey</small></div>
+    </div>
+    <div class="number-feature">
+      <div class="number">$411<sup>K</sup></div>
+      <div class="desc">median household income of operators of large-scale family farms in 2024 — well into the top 3% of all U.S. households, before any government payments.<small>USDA ERS · America's Farms and Ranches at a Glance 2025</small></div>
+    </div>
+    <div class="number-feature">
+      <div class="number">28<sup>%</sup></div>
+      <div class="desc">of total U.S. net cash farm income for 2026 is projected to come from direct government payments — and that excludes crop insurance subsidies entirely.<small>USDA ERS Farm Income Forecast · February 2026</small></div>
+    </div>
+  </div>
+</section>
+
+<footer class="page-foot">
+  <div class="page-foot-inner">
+    <button data-tab="overview"><span class="label">← Previous</span><span class="target">Page I · Overview</span></button>
+    <button data-tab="tiers" class="next"><span class="label">Next →</span><span class="target">Page III · Tier System</span></button>
+  </div>
+</footer>
+
+</section>
+
+<!-- ============ TAB: TIERS ============ -->
+<section class="tab-panel" id="panel-tiers">
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Page III · Architecture</div>
+    <h1 class="page-title">Four <em>tiers</em>, calibrated to where the need actually lives.</h1>
+    <p class="page-deck">All federal commodity, conservation, and insurance support is reorganized into four producer tiers, defined by Gross Cash Farm Income measured at the operation level — with full attribution through unlimited ownership layers and across affiliated operations under common management.</p>
+  </div>
+</header>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <span class="section-eyebrow">Title II · Producer Tier &amp; Eligibility</span>
+        <h2 class="section-title">From "actively engaged in farming" to clearly tiered support.</h2>
+      </div>
+    </div>
+    <div class="tier-stack">
+      <div class="tier-row">
+        <div class="tier-roman">I.</div>
+        <div>
+          <div class="tier-name">Beginning &amp; Small Producers<small>GCFI under $350,000</small></div>
+          <div class="tier-share"><b>86%</b> of U.S. farms.<br>Receives <b>~32%</b> of total program dollars under Fair Farms.</div>
+        </div>
+        <div class="tier-desc">The 86% of U.S. farms historically locked out of meaningful Title I support. Receives the deepest subsidy rates, simplified paperwork, dedicated technical assistance, and priority access to land-transfer financing. Beginning farmers (under 10 years operating) receive an additional 15% bonus across all programs. Also eligible for the Direct Equipment &amp; Materials Grant (§ 351) — up to $8,000/year, no minimum revenue required — and the $2,000 minimum stewardship floor regardless of acreage.</div>
+        <div class="tier-stats">
+          <div class="tier-stat"><div class="tier-stat-num">80%</div><div class="tier-stat-label">crop insurance premium subsidy</div></div>
+          <div class="tier-stat"><div class="tier-stat-num">$45,000</div><div class="tier-stat-label">annual stewardship floor payment</div></div>
+          <div class="tier-stat"><div class="tier-stat-num">+15%</div><div class="tier-stat-label">beginning farmer bonus (≤10 yrs)</div></div>
+        </div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-roman">II.</div>
+        <div>
+          <div class="tier-name">Mid-Size Producers<small>GCFI $350K – $1M</small></div>
+          <div class="tier-share"><b>10%</b> of U.S. farms.<br>The vanishing middle of American agriculture.</div>
+        </div>
+        <div class="tier-desc">Full access to revenue-protection programs, regenerative practice payments, and the diversification bonus structure. Eligible for cooperative grants to share equipment, processing, and marketing infrastructure with Tier I producers in their region.</div>
+        <div class="tier-stats">
+          <div class="tier-stat"><div class="tier-stat-num">65%</div><div class="tier-stat-label">crop insurance premium subsidy</div></div>
+          <div class="tier-stat"><div class="tier-stat-num">$125,000</div><div class="tier-stat-label">annual payment ceiling</div></div>
+          <div class="tier-stat"><div class="tier-stat-num">Full</div><div class="tier-stat-label">access to all programs</div></div>
+        </div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-roman">III.</div>
+        <div>
+          <div class="tier-name">Large Producers<small>GCFI $1M – $5M</small></div>
+          <div class="tier-share"><b>3%</b> of U.S. farms but produce 40%+ of total ag value.</div>
+        </div>
+        <div class="tier-desc">Reduced subsidy access. Eligible for stewardship payments and basic insurance support, but excluded from price-loss programs and disaster ad-hoc assistance. Required to file annual diversification reports. Operations exceeding 50% commodity concentration are stepped down to Tier III-B rates.</div>
+        <div class="tier-stats">
+          <div class="tier-stat"><div class="tier-stat-num">45%</div><div class="tier-stat-label">crop insurance premium subsidy</div></div>
+          <div class="tier-stat"><div class="tier-stat-num">$60,000</div><div class="tier-stat-label">annual payment ceiling</div></div>
+          <div class="tier-stat"><div class="tier-stat-num disabled">ARC/PLC</div><div class="tier-stat-label">excluded from price-loss programs</div></div>
+        </div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-roman">IV.</div>
+        <div>
+          <div class="tier-name">Industrial Producers<small>GCFI above $5,000,000</small></div>
+          <div class="tier-share"><b>1%</b> of U.S. farms.<br>Includes the largest grain, cotton, and dairy operations.</div>
+        </div>
+        <div class="tier-desc">Operations of this scale have demonstrated capacity to manage risk through private markets. Eligibility limited to baseline insurance access and conservation easement payments. Ineligible for direct commodity support, ARC/PLC, marketing-loan gains, and ad-hoc disaster programs. Eligible for Title VII Urban Harvest credits as an alternative track.</div>
+        <div class="tier-stats">
+          <div class="tier-stat"><div class="tier-stat-num">35%</div><div class="tier-stat-label">crop insurance subsidy (capped)</div></div>
+          <div class="tier-stat"><div class="tier-stat-num">$0</div><div class="tier-stat-label">commodity program payments</div></div>
+          <div class="tier-stat"><div class="tier-stat-num">$125K</div><div class="tier-stat-label">absolute insurance subsidy cap</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wheat-divider">❦ ❦ ❦</div>
+
+    <div class="anti-circumvent">
+      <div class="label">§ 204 · Anti-Circumvention &amp; Aggregation</div>
+      <h3>Splitting an operation into legal shells to claim a lower tier is a Class B violation.</h3>
+      <p>The four-tier system collapses if operators can simply restructure into multiple smaller entities. Section 204 closes that door. Operations under <strong style="color:var(--harvest);">common management</strong> — defined as sharing equipment, labor, marketing, or land-management decisions across two or more legal entities — are aggregated as a single operation for tier purposes.</p>
+      <p>The Secretary shall promulgate rules to identify common management through equipment-sharing patterns, shared FSA records, common addresses of beneficial owners, and seven additional indicia. Splitting an operation into multiple legal shells to claim a lower tier triggers five-year program disqualification and clawback of all payments received during the violation period.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-warm reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <span class="section-eyebrow">Worked Example · The Same Operation, Two Outcomes</span>
+        <h2 class="section-title">An 8,000-acre corn-and-soy operation, before and after.</h2>
+      </div>
+    </div>
+    <p style="max-width:740px;font-size:17px;line-height:1.6;color:var(--loam-soft);">Consider a real-world structure: an 8,000-acre row-crop operation in Iowa organized as an 8-person family general partnership. The principal operator, spouse, two adult children, sibling, two cousins, and one niece — all listed as partners. GCFI: $4.2 million. Production: corn and soybeans only.</p>
+    <div class="scenario">
+      <div class="before">
+        <div class="heading">Under Current Law</div>
+        <h4>~$1.24M in commodity payments + uncapped insurance</h4>
+        <div class="calc">
+          8 partners × $155K cap (post-OBBBA) = $1,240,000<br>
+          Crop insurance premium subsidy (~62%) = ~$340,000<br>
+          Marketing-loan gains (uncapped): variable<br>
+          Ad-hoc disaster eligibility: <b>full</b><br>
+          AGI test: <b>passed</b> (75% farm-income exception)
+          <span class="highlight">≈ $1.6M+ in annual federal support</span>
+        </div>
+      </div>
+      <div class="after">
+        <div class="heading">Under the Fair Farms Act</div>
+        <h4>Tier IV classification, single cap, no commodity support</h4>
+        <div class="calc">
+          Common-management aggregation: single operation<br>
+          GCFI $4.2M → Tier III/IV boundary<br>
+          ARC/PLC: <b>excluded</b><br>
+          Crop insurance: 35–45% subsidy, capped at $125K<br>
+          Stewardship: eligible only with diversification
+          <span class="highlight">≈ $125K in annual federal support</span>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:32px;max-width:780px;font-size:15px;line-height:1.6;color:var(--loam-soft);font-style:italic;">The freed funds — roughly $1.5M per operation of this scale — are reallocated to Tier I and II producers in the same state through stewardship payments, the Beginning Farmer Land Trust, and regional cooperative infrastructure grants.</p>
+  </div>
+</section>
+
+<footer class="page-foot">
+  <div class="page-foot-inner">
+    <button data-tab="problem"><span class="label">← Previous</span><span class="target">Page II · The Problem</span></button>
+    <button data-tab="programs" class="next"><span class="label">Next →</span><span class="target">Page IV · The Programs</span></button>
+  </div>
+</footer>
+
+</section>
+
+<!-- ============ TAB: PROGRAMS — REFINED ============ -->
+<section class="tab-panel" id="panel-programs">
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Page IV · Structure</div>
+    <h1 class="page-title">Eight titles. <em>One</em> coherent system.</h1>
+    <p class="page-deck">The bill restructures Title I commodity programs and adds new program titles built alongside. Each title can be read independently, but the bill's force comes from how they interlock.</p>
+  </div>
+</header>
+
+<section class="section reveal">
+  <div class="section-inner">
+
+    <p class="programs-intro">Open any title to read its core provisions. Title II provides the eligibility framework; Title I rebuilds payment structure around stewardship outcomes; Title III adds the diversification multiplier. Titles IV through VII handle insurance, land access, regional infrastructure, and the new urban innovation track. Title VIII handles transition.</p>
+
+    <div class="titles-list">
+
+      <div class="title-item">
+        <button class="title-item-header">
+          <div class="title-item-num">Title I</div>
+          <div class="title-item-name">The <em>Stewardship</em> Foundation</div>
+          <div class="title-item-tagline">Replaces ARC and PLC. Pays producers for measurable ecological outcomes — not the volume of commodities they produce.</div>
+          <div class="title-item-toggle">+</div>
+        </button>
+        <div class="title-item-body">
+          <div class="title-item-content">
+            <div>Detail</div>
+            <div class="title-detail">
+              <p>Title I is the structural heart of the new system. Where ARC and PLC tied federal payments to commodity volume and historical base acres, the Stewardship Foundation ties them to verified ecological practices on currently-farmed land. The four practice payments are designed to stack additively — a single operation can simultaneously earn cover crop, rotation diversity, soil carbon, and habitat payments.</p>
+              <div class="title-provisions">
+                <h5>Practice Payments</h5>
+                <dl>
+                  <dt>§ 302(1)</dt><dd><strong>Cover Cropping Premium</strong> — $35/acre on at least 60% of cultivated acres; $55/acre for multi-species mixes.</dd>
+                  <dt>§ 302(2)</dt><dd><strong>Rotation Diversity Bonus</strong> — $25/acre for 3-crop rotations; $50/acre for 4+ crop rotations including a small grain or legume.</dd>
+                  <dt>§ 302(3)</dt><dd><strong>Soil Carbon Performance</strong> — Per-ton payment scaling with verified increase in soil organic matter, measured on 5-year cycles.</dd>
+                  <dt>§ 302(4)</dt><dd><strong>Pollinator &amp; Riparian Habitat</strong> — $200/acre for buffer strips, native plantings, edge habitat exceeding NRCS minimums.</dd>
+                  <dt>§ 305</dt><dd><strong>Operation Caps</strong> — $95K (Tier I), $70K (Tier II), $30K (Tier III). Tier IV eligible for habitat payments only.</dd>
+                  <dt>§ 351</dt><dd><strong>Direct Equipment &amp; Materials Grant (NEW)</strong> — Up to $8,000/year, no GCFI floor. Farmer selects from pre-approved list based on what they don't already have: cover crop seed, drip irrigation, greenhouse materials, soil testing, composting infrastructure, hand tools.</dd>
+                  <dt>§ 352</dt><dd><strong>Minimum Stewardship Floor (NEW)</strong> — All enrolled Tier I producers receive at least $2,000/year regardless of acreage. Per-acre calculation applies if it produces more.</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="title-item">
+        <button class="title-item-header">
+          <div class="title-item-num">Title II</div>
+          <div class="title-item-name">Producer <em>Tier</em> &amp; Eligibility</div>
+          <div class="title-item-tagline">The structural backbone. Defines tiers, ownership attribution, the 1,000-hour test, and anti-circumvention rules.</div>
+          <div class="title-item-toggle">+</div>
+        </button>
+        <div class="title-item-body">
+          <div class="title-item-content">
+            <div>Detail</div>
+            <div class="title-detail">
+              <p>Title II is what makes the entire bill enforceable. Without it, Title I's payment structure could be circumvented through legal restructuring. Section 201 repeals the family-member exemption that has frustrated reform for over a decade. Section 203 replaces "active personal management" — undefined in current statute — with a quantifiable 1,000-hour combined labor test that applies uniformly to all participants.</p>
+              <div class="title-provisions">
+                <h5>Core Provisions</h5>
+                <dl>
+                  <dt>§ 201</dt><dd>Repeals the family-member exemption at <strong>2014 Farm Bill § 1604</strong>.</dd>
+                  <dt>§ 202</dt><dd>Establishes the four-tier GCFI classification.</dd>
+                  <dt>§ 203</dt><dd><strong>1,000-hour</strong> combined labor &amp; on-site management requirement.</dd>
+                  <dt>§ 204</dt><dd>Anti-circumvention; common-management aggregation.</dd>
+                  <dt>§ 205</dt><dd>Full payment attribution through <strong>unlimited</strong> ownership layers.</dd>
+                  <dt>§ 206</dt><dd>AGI ceiling of <strong>$400,000</strong> three-year average.</dd>
+                  <dt>§ 207</dt><dd>Repeals the <strong>"except a joint venture or general partnership"</strong> clause.</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="title-item">
+        <button class="title-item-header">
+          <div class="title-item-num">Title III</div>
+          <div class="title-item-name">The <em>Diversification</em> Premium</div>
+          <div class="title-item-tagline">Rewards farms for growing more than two crops. The narrower the portfolio, the lower the support.</div>
+          <div class="title-item-toggle">+</div>
+        </button>
+        <div class="title-item-body">
+          <div class="title-item-content">
+            <div>Detail</div>
+            <div class="title-detail">
+              <p>The historical incentive structure — payments tied to base acres of corn, soybeans, wheat, cotton, and rice — has produced exactly the monoculture landscape it incentivized. Title III flips the structure. The diversity index is a multiplier on stewardship payments, scaling from zero (for two-crop operations) to 35% (for five-or-more crops including legumes and perennials).</p>
+              <div class="title-provisions">
+                <h5>The Diversity Index Multipliers</h5>
+                <dl>
+                  <dt>2 crops</dt><dd>No bonus. Standard subsidy rate only.</dd>
+                  <dt>3 crops</dt><dd><strong>+10%</strong> on stewardship payments.</dd>
+                  <dt>4 crops + grain</dt><dd><strong>+20%</strong> bonus.</dd>
+                  <dt>5+ crops</dt><dd><strong>+35%</strong> with legume and perennial.</dd>
+                  <dt>Specialty</dt><dd><strong>+$40/acre</strong> transition payment for first 3 years adding fruits/vegetables/nuts.</dd>
+                  <dt>§ 304</dt><dd><strong>Regional Food Resilience Reserve</strong> — federal purchase guarantees for diversified small grains, legumes, pulses.</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="title-item">
+        <button class="title-item-header">
+          <div class="title-item-num">Title IV</div>
+          <div class="title-item-name">Reformed <em>Risk Management</em></div>
+          <div class="title-item-tagline">Replaces uncapped, anonymous crop insurance with a tier-scaled, transparent, capped program.</div>
+          <div class="title-item-toggle">+</div>
+        </button>
+        <div class="title-item-body">
+          <div class="title-item-content">
+            <div>Detail</div>
+            <div class="title-detail">
+              <p>Federal crop insurance is the largest single subsidy stream in U.S. agriculture, operating today under statutory secrecy with no payment cap and no income test. Title IV does not eliminate the program — small and mid-size farmers genuinely need risk protection — but it scales subsidies inversely with operation size, opens the recipient list to public scrutiny, and renegotiates the inflated returns currently paid to private insurance companies.</p>
+              <div class="title-provisions">
+                <h5>Subsidy Schedule &amp; Reforms</h5>
+                <dl>
+                  <dt>Tier I</dt><dd><strong>80%</strong> premium subsidy; no deductible on first $50K of indemnities.</dd>
+                  <dt>Tier II</dt><dd><strong>65%</strong> premium subsidy.</dd>
+                  <dt>Tier III</dt><dd><strong>45%</strong> premium subsidy.</dd>
+                  <dt>Tier IV</dt><dd><strong>35%</strong> subsidy with <strong>$125K hard cap</strong> per operation.</dd>
+                  <dt>§ 403</dt><dd>Repeals recipient confidentiality at <strong>7 U.S.C. § 1502(c)</strong>.</dd>
+                  <dt>§ 404</dt><dd>Repeals SRA budget-neutrality requirement.</dd>
+                  <dt>§ 405</dt><dd>Lowers AIP target return from <strong>14.5% to 9.5%</strong>.</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="title-item">
+        <button class="title-item-header">
+          <div class="title-item-num">Title V</div>
+          <div class="title-item-name">Land Access &amp; <em>Generational</em> Transition</div>
+          <div class="title-item-tagline">Federal financing tools, retiring-farmer incentives, and anti-speculation measures for the next generation.</div>
+          <div class="title-item-toggle">+</div>
+        </button>
+        <div class="title-item-body">
+          <div class="title-item-content">
+            <div>Detail</div>
+            <div class="title-detail">
+              <p>The most-cited barrier to small farming is land. The average age of a U.S. farmer is now over 58, and roughly 40% of agricultural land is expected to change hands in the next two decades. Title V intervenes at that transfer point: it makes it cheaper to sell to small operators and more expensive to sell to institutional investors.</p>
+              <div class="title-provisions">
+                <h5>Programs</h5>
+                <dl>
+                  <dt>§ 501</dt><dd><strong>Beginning Farmer Land Trust</strong> — federal loan guarantees up to $1.2M at 1.5% interest.</dd>
+                  <dt>§ 502</dt><dd><strong>Retiring Farmer Bonus</strong> — up to $250K capital-gains relief for selling to a Tier I producer.</dd>
+                  <dt>§ 503</dt><dd><strong>Anti-Speculation Surcharge</strong> — 4% federal excise on land sales to non-operators with 1,000+ acres.</dd>
+                  <dt>§ 504</dt><dd><strong>Tribal Land Reacquisition</strong> — direct grants to federally recognized tribes for ancestral territory.</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="title-item">
+        <button class="title-item-header">
+          <div class="title-item-num">Title VI</div>
+          <div class="title-item-name">Regional <em>Infrastructure</em> &amp; Cooperatives</div>
+          <div class="title-item-tagline">Small farms fail not for lack of crops but for lack of processors, aggregators, and routes to market.</div>
+          <div class="title-item-toggle">+</div>
+        </button>
+        <div class="title-item-body">
+          <div class="title-item-content">
+            <div>Detail</div>
+            <div class="title-detail">
+              <p>The "missing middle" of American agriculture — regional processing, aggregation, and distribution — has been hollowed out by industry consolidation over the last forty years. A small wheat farmer in Indiana cannot easily sell flour because the nearest mill closed in 1998. Title VI rebuilds that infrastructure through federal grants for cooperative-owned facilities, and creates demand by mandating that federal feeding programs source regionally.</p>
+              <div class="title-provisions">
+                <h5>Investments</h5>
+                <dl>
+                  <dt>§ 601</dt><dd><strong>Regional Processing Grants</strong> — up to $5M per project for cooperative meat, grain, dairy, produce facilities.</dd>
+                  <dt>§ 602</dt><dd><strong>Local Procurement Mandate</strong> — federal feeding programs source <strong>30%</strong> from within 250 miles by FY 2032, scaling to 50% by FY 2036.</dd>
+                  <dt>§ 603</dt><dd><strong>Cooperative Capitalization Fund</strong> — equity-equivalent investments in producer-owned cooperatives.</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="title-item">
+        <button class="title-item-header">
+          <div class="title-item-num">Title VII</div>
+          <div class="title-item-name">Urban Harvest &amp; <em>Innovation</em> Track</div>
+          <div class="title-item-tagline">A parallel program for industrial-scale capital. Channels large-firm investment toward urban controlled-environment agriculture.</div>
+          <div class="title-item-toggle">+</div>
+        </button>
+        <div class="title-item-body">
+          <div class="title-item-content">
+            <div>Detail</div>
+            <div class="title-detail">
+              <p>Title VII is structurally distinct from the rest of the bill. Where Titles I–VI restrict the largest operators' access to federal commodity support, Title VII opens an alternative track designed to channel that same scale of capital toward urban food infrastructure. The complete provisions, conditions, and a worked example are presented on the dedicated Urban Harvest page.</p>
+              <p style="margin-top:16px;"><button data-tab="urban" style="background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-family:'JetBrains Mono',monospace;letter-spacing:0.18em;text-transform:uppercase;color:var(--harvest-deep);border-bottom:1px solid var(--harvest-deep);padding:0 0 4px 0;">Read Title VII in detail →</button></p>
+              <div class="title-provisions">
+                <h5>At a Glance</h5>
+                <dl>
+                  <dt>§ 701</dt><dd><strong>40% construction credit</strong> for vertical farms in food-access priority tracts.</dd>
+                  <dt>§ 702</dt><dd><strong>+15% adaptive reuse</strong> bonus for vacant industrial structures.</dd>
+                  <dt>§ 703</dt><dd>Renewable power requirement scaling to <strong>100% by year 7</strong>.</dd>
+                  <dt>§ 704</dt><dd><strong>$400M annual</strong> federal procurement guarantee.</dd>
+                  <dt>§ 707</dt><dd>Anti-substitution clause — cannot stack with Title I commodity payments.</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="title-item">
+        <button class="title-item-header">
+          <div class="title-item-num">Title VIII</div>
+          <div class="title-item-name">Transition, <em>Effective Dates</em>, &amp; Repeals</div>
+          <div class="title-item-tagline">Phasing rules. Most reforms take effect Crop Year 2027. Existing contracts honored through their natural term.</div>
+          <div class="title-item-toggle">+</div>
+        </button>
+        <div class="title-item-body">
+          <div class="title-item-content">
+            <div>Detail</div>
+            <div class="title-detail">
+              <p>The bill is phased over five crop years to give producers and FSA staff time to adjust. Existing ARC, PLC, and crop insurance contracts in force at enactment are honored through their natural term. Producers may opt into the new framework earlier without penalty.</p>
+              <div class="title-provisions">
+                <h5>Implementation Schedule</h5>
+                <dl>
+                  <dt>CY 2027</dt><dd>Tier system, 1,000-hour test, Title IV insurance reforms, transparency provisions.</dd>
+                  <dt>CY 2028</dt><dd>Title VII Urban Harvest credit available for new construction.</dd>
+                  <dt>CY 2029</dt><dd>Title V Land Trust fully operational; Local Procurement Mandate begins.</dd>
+                  <dt>CY 2032</dt><dd>Base acres fully sunset; stewardship payments fully replace ARC/PLC.</dd>
+                  <dt>§ 805</dt><dd>Express repeals: 2014 § 1604, 2014 § 11017, 7 U.S.C. § 1502(c), OBBBA §§ 10301–10302.</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section section-warm reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <span class="section-eyebrow">How the Stack Works · Three Worked Examples</span>
+        <h2 class="section-title">Designed to compound for the farmers we want to grow.</h2>
+      </div>
+    </div>
+    <div class="stack-row">
+      <div class="stack-cell">
+        <div class="stack-icon"><svg viewBox="0 0 48 48"><path d="M24 6 L24 42 M12 18 Q24 12 36 18 M10 28 Q24 22 38 28 M14 38 Q24 34 34 38"/></svg></div>
+        <div class="stack-tag">Stewardship Stack</div>
+        <h4 class="stack-name">A Tier I farm with cover crops, 4-crop rotation, and pollinator strips can stack four payment streams.</h4>
+        <p class="stack-desc">Practice payments are additive. The same 400-acre operation can simultaneously receive cover crop payments, rotation diversity bonuses, soil carbon payments, and habitat payments.</p>
+        <div class="stack-calc">
+          <strong>Worked Example:</strong>
+          400 acres × $55/ac cover crops = $22,000<br>
+          + 4-crop rotation bonus = +$10,000<br>
+          + 12 acres pollinator habitat × $200 = +$2,400<br>
+          <span class="amount" style="display:block;margin-top:10px;font-size:16px;">= $34,400/year stewardship income</span>
+        </div>
+      </div>
+      <div class="stack-cell">
+        <div class="stack-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="8"/><path d="M24 4 L24 10 M24 38 L24 44 M4 24 L10 24 M38 24 L44 24"/></svg></div>
+        <div class="stack-tag">Diversification Index</div>
+        <h4 class="stack-name">The narrower the crop portfolio, the lower the support. Monoculture loses its bonus.</h4>
+        <p class="stack-desc">A corn-soybean operation gets only the standard rate. Adding wheat earns 10%. Adding a legume cover and small grain takes it to 35%.</p>
+        <div class="stack-calc">
+          <strong>Worked Example:</strong>
+          Tier II farm earning $50,000 in stewardship<br>
+          2-crop monoculture: $50,000<br>
+          4-crop rotation w/ small grain: $60,000 (+20%)<br>
+          <span class="amount" style="display:block;margin-top:10px;font-size:16px;">5+ crops w/ legume &amp; perennial: $67,500 (+35%)</span>
+        </div>
+      </div>
+      <div class="stack-cell">
+        <div class="stack-icon"><svg viewBox="0 0 48 48"><rect x="10" y="10" width="28" height="32"/><path d="M10 18 L38 18 M10 26 L38 26 M10 34 L38 34 M16 6 L16 12 M32 6 L32 12"/></svg></div>
+        <div class="stack-tag">Urban Innovation</div>
+        <h4 class="stack-name">Title VII gives industrial-scale capital a new place to compete — without distorting rural land.</h4>
+        <p class="stack-desc">A vertical farming company building in a former Cleveland warehouse can stack the construction credit, adaptive reuse bonus, and procurement guarantees.</p>
+        <div class="stack-calc">
+          <strong>Worked Example:</strong>
+          $20M facility in food-access priority tract<br>
+          Construction credit (40%): $8.0M<br>
+          Adaptive reuse bonus (15%): $3.0M<br>
+          <span class="amount" style="display:block;margin-top:10px;font-size:16px;">Annual procurement guarantee: ~$1.2M/yr</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <span class="section-eyebrow">The Diversity Index · How It Calculates</span>
+        <h2 class="section-title">A simple bonus structure, applied to all stewardship payments.</h2>
+      </div>
+    </div>
+    <div class="diversity-table">
+      <div class="div-row">
+        <div class="div-num">2</div>
+        <div><div class="div-label">Two commodities or fewer</div><div class="div-detail">Standard corn-soybean rotation, the most common U.S. cropping pattern.</div></div>
+        <div class="div-detail">Standard subsidy rate. No diversity bonus.</div>
+        <div class="div-bonus zero">+0%</div>
+      </div>
+      <div class="div-row">
+        <div class="div-num">3</div>
+        <div><div class="div-label">Three commodities</div><div class="div-detail">Adding a third crop — wheat, oats, or a legume — to the rotation.</div></div>
+        <div class="div-detail">Modest bonus on all stewardship payments.</div>
+        <div class="div-bonus">+10%</div>
+      </div>
+      <div class="div-row">
+        <div class="div-num">4</div>
+        <div><div class="div-label">Four commodities + small grain</div><div class="div-detail">A four-way rotation including at least one small grain (wheat, oats, barley, rye).</div></div>
+        <div class="div-detail">Substantial bonus across all programs.</div>
+        <div class="div-bonus">+20%</div>
+      </div>
+      <div class="div-row">
+        <div class="div-num">5+</div>
+        <div><div class="div-label">Five+ commodities + legume + perennial</div><div class="div-detail">A diverse rotation including legumes for nitrogen and a perennial component.</div></div>
+        <div class="div-detail">Maximum bonus. Highest soil and ecological returns.</div>
+        <div class="div-bonus">+35%</div>
+      </div>
+      <div class="div-row">
+        <div class="div-num">+</div>
+        <div><div class="div-label">Specialty crop inclusion</div><div class="div-detail">Adding fruits, vegetables, or nuts to a commodity rotation. Stacks with the above.</div></div>
+        <div class="div-detail">Per-acre transition payment for first 3 years.</div>
+        <div class="div-bonus">+$40/ac</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="page-foot">
+  <div class="page-foot-inner">
+    <button data-tab="tiers"><span class="label">← Previous</span><span class="target">Page III · The Tier System</span></button>
+    <button data-tab="regenerative" class="next"><span class="label">Next →</span><span class="target">Page V · Regenerative Transition</span></button>
+  </div>
+</footer>
+
+</section>
+
+<!-- ============ TAB: REGENERATIVE TRANSITION ============ -->
+<section class="tab-panel" id="panel-regenerative">
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="page-eyebrow">Page V · The Transition</div>
+    <h1 class="page-title">The math <em>flips</em> in year four.</h1>
+    <p class="page-deck">Regenerative practices lower production costs over time — less synthetic fertilizer, less herbicide, less irrigation, less soil erosion to repair. But the transition years are the hard part. Yields can dip, learning curves are steep, and conventional debt structures don't bend. The Fair Farms Act builds that bridge with a dedicated transition program designed to carry farmers across the cost-curve crossover.</p>
+  </div>
+</header>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <span class="section-eyebrow">The Economic Case · Why Regenerative Pays Back</span>
+        <h2 class="section-title">A subsidy that pays for itself by reducing the need for future subsidy.</h2>
+      </div>
+    </div>
+
+    <div class="regen-thesis">
+      <div class="regen-thesis-text">
+        <p>Conventional row-crop agriculture in the U.S. has spent eighty years optimizing for one variable: yield per acre per year. That optimization comes at the cost of soil structure, organic matter, water-holding capacity, and biological function — which producers then replace, year after year, by purchasing synthetic nitrogen, phosphorus, herbicides, fungicides, and increasingly expensive irrigation.</p>
+        <p>Regenerative practices invert the equation. Cover crops fix nitrogen biologically and suppress weeds physically; diverse rotations break pest cycles without spraying; managed grazing rebuilds organic matter that holds water through droughts; reduced tillage cuts fuel and equipment costs. The catch is that these practices take three to seven years to fully replace what the soil had been doing on borrowed credit.</p>
+        <p>The Fair Farms Act treats that bridge as the highest-leverage federal investment in agriculture. Every dollar spent helping a producer transition is a dollar that doesn't need to be spent on disaster relief, on soil-erosion remediation, on water-quality cleanup, or on the next round of commodity supports when the conventional system fails again.</p>
+      </div>
+
+      <aside class="regen-pullstats">
+        <h4>What the Research Shows</h4>
+        <div class="stat-line">
+          <div class="stat-num"><em>−40%</em> to −60%</div>
+          <div class="stat-text">Synthetic nitrogen input reduction by year five on operations using cover cropping and diverse rotations.</div>
+        </div>
+        <div class="stat-line">
+          <div class="stat-num"><em>+15%</em> to +30%</div>
+          <div class="stat-text">Soil water-holding capacity improvement after five years of continuous cover, reducing irrigation cost and drought risk.</div>
+        </div>
+        <div class="stat-line">
+          <div class="stat-num"><em>$45</em>–<em>$120</em>/ac</div>
+          <div class="stat-text">Reduction in per-acre input costs at full transition, depending on commodity and starting baseline.</div>
+        </div>
+        <div class="stat-line">
+          <div class="stat-num"><em>3–7 yrs</em></div>
+          <div class="stat-text">Typical timeline before regenerative practices reach the cost-curve crossover. The hardest part is years one through three.</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section section-warm reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <span class="section-eyebrow">The Transition Arc · Five Phases, Five to Seven Years</span>
+        <h2 class="section-title">The shape of the transition, and where federal support is most needed.</h2>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-grid">
+        <div class="timeline-stage">
+          <div class="timeline-year">Year 0</div>
+          <div class="timeline-marker"></div>
+          <h4>Baseline</h4>
+          <p>Conventional rotation. High input costs accepted as fixed overhead.</p>
+          <span class="cost-tag expense">Costs Locked In</span>
+        </div>
+        <div class="timeline-stage">
+          <div class="timeline-year">Years 1–2</div>
+          <div class="timeline-marker active"></div>
+          <h4>Disruption</h4>
+          <p>Cover crops introduced. Yield variability rises. Equipment retooling. Steepest learning curve.</p>
+          <span class="cost-tag expense">Highest Risk Phase</span>
+        </div>
+        <div class="timeline-stage">
+          <div class="timeline-year">Years 3–4</div>
+          <div class="timeline-marker active"></div>
+          <h4>Stabilization</h4>
+          <p>Soil biology rebuilding. Synthetic input use declining. Yields recover. Practices become routine.</p>
+          <span class="cost-tag break-even">Crossover</span>
+        </div>
+        <div class="timeline-stage">
+          <div class="timeline-year">Years 5–6</div>
+          <div class="timeline-marker complete"></div>
+          <h4>Compounding</h4>
+          <p>Input costs continue dropping. Yields meet or exceed conventional baseline. Operation becomes more drought-resilient.</p>
+          <span class="cost-tag savings">Net Positive</span>
+        </div>
+        <div class="timeline-stage">
+          <div class="timeline-year">Year 7+</div>
+          <div class="timeline-marker complete"></div>
+          <h4>Mature System</h4>
+          <p>Lower input costs locked in. Diversified income streams. Reduced dependence on commodity programs and disaster aid.</p>
+          <span class="cost-tag savings">Self-Sustaining</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cost-curve">
+      <div class="label">The Crossover · Why Year Four Matters</div>
+      <h3>Federal support is heaviest in years 1–3, tapers in years 4–5, and disappears once the operation is paying for <em>itself</em>.</h3>
+
+      <div class="cost-curve-art">
+        <svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid -->
+          <g stroke="rgba(245,241,232,0.1)" stroke-width="1">
+            <line x1="80" y1="60" x2="850" y2="60"/>
+            <line x1="80" y1="120" x2="850" y2="120"/>
+            <line x1="80" y1="180" x2="850" y2="180"/>
+            <line x1="80" y1="240" x2="850" y2="240"/>
+          </g>
+
+          <!-- Axes -->
+          <line x1="80" y1="40" x2="80" y2="280" stroke="#ede5d0" stroke-width="1"/>
+          <line x1="80" y1="280" x2="850" y2="280" stroke="#ede5d0" stroke-width="1"/>
+
+          <!-- Y axis label -->
+          <text x="20" y="160" font-family="JetBrains Mono" font-size="9" fill="#c89732" letter-spacing="2" transform="rotate(-90 20 160)">DOLLARS / ACRE</text>
+
+          <!-- X axis labels -->
+          <text x="160" y="305" font-family="JetBrains Mono" font-size="10" fill="#e0d5b7" text-anchor="middle" letter-spacing="2">YEAR 1</text>
+          <text x="290" y="305" font-family="JetBrains Mono" font-size="10" fill="#e0d5b7" text-anchor="middle" letter-spacing="2">YEAR 2</text>
+          <text x="420" y="305" font-family="JetBrains Mono" font-size="10" fill="#e0d5b7" text-anchor="middle" letter-spacing="2">YEAR 3</text>
+          <text x="550" y="305" font-family="JetBrains Mono" font-size="10" fill="#e0d5b7" text-anchor="middle" letter-spacing="2">YEAR 4</text>
+          <text x="680" y="305" font-family="JetBrains Mono" font-size="10" fill="#e0d5b7" text-anchor="middle" letter-spacing="2">YEAR 5</text>
+          <text x="810" y="305" font-family="JetBrains Mono" font-size="10" fill="#e0d5b7" text-anchor="middle" letter-spacing="2">YEAR 6</text>
+
+          <!-- Crossover marker (vertical dotted line at year 4) -->
+          <line x1="550" y1="40" x2="550" y2="280" stroke="#c89732" stroke-width="1" stroke-dasharray="3,4" opacity="0.5"/>
+          <text x="550" y="30" font-family="JetBrains Mono" font-size="9" fill="#c89732" text-anchor="middle" letter-spacing="2">CROSSOVER</text>
+
+          <!-- Input cost curve (rust, declining) -->
+          <path d="M 160 90 Q 250 100 290 115 Q 380 145 420 165 Q 510 200 550 215 Q 640 240 680 248 Q 770 258 810 262"
+                fill="none" stroke="#a8451f" stroke-width="2.5"/>
+          <text x="190" y="78" font-family="Source Serif 4" font-size="13" fill="#a8451f" font-style="italic">Input costs (synthetic N, herbicides, fuel)</text>
+
+          <!-- Federal support curve (harvest, declining steeper) -->
+          <path d="M 160 130 Q 250 145 290 158 Q 380 185 420 200 Q 510 230 550 240 Q 640 258 680 264 Q 770 270 810 272"
+                fill="none" stroke="#c89732" stroke-width="2.5" stroke-dasharray="6,4"/>
+          <text x="190" y="148" font-family="Source Serif 4" font-size="13" fill="#c89732" font-style="italic">Federal transition support (tapers to zero)</text>
+
+          <!-- Net cost curve (sage, dipping then rising savings) -->
+          <path d="M 160 110 Q 250 125 290 140 Q 380 165 420 175 Q 510 175 550 170 Q 640 145 680 130 Q 770 105 810 90"
+                fill="none" stroke="#5c6b3c" stroke-width="3"/>
+          <text x="600" y="105" font-family="Source Serif 4" font-size="13" fill="#5c6b3c" font-style="italic">Net cost to operator (regenerative)</text>
+
+          <!-- Conventional baseline (flat reference line) -->
+          <line x1="160" y1="135" x2="810" y2="135" stroke="#ede5d0" stroke-width="1" stroke-dasharray="2,3" opacity="0.5"/>
+          <text x="820" y="139" font-family="JetBrains Mono" font-size="9" fill="#ede5d0" letter-spacing="1" opacity="0.7">CONVENTIONAL</text>
+        </svg>
+      </div>
+
+      <div class="cost-curve-legend">
+        <div class="item"><span class="swatch input"></span>Input costs</div>
+        <div class="item"><span class="swatch support"></span>Federal transition support</div>
+        <div class="item"><span class="swatch net"></span>Net cost to operator</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <span class="section-eyebrow">Title III–A · The Six Transition Practices</span>
+        <h2 class="section-title">What gets paid for, at what rate, for how long.</h2>
+      </div>
+    </div>
+
+    <p style="max-width:780px;font-size:17px;line-height:1.6;color:var(--loam-soft);margin-bottom:30px;">The Transition Subtitle establishes a tapered three-year payment structure for each qualifying practice. Year one pays the highest rate to offset disruption costs; year three pays a maintenance rate as the practice becomes routine. After year three the practice rolls into the standard Title I stewardship payment.</p>
+
+    <div class="practice-grid">
+
+      <div class="practice">
+        <div class="practice-icon">
+          <svg viewBox="0 0 48 48"><path d="M8 36 Q24 20 40 36 M14 30 L14 24 M22 26 L22 18 M30 26 L30 18 M38 30 L38 24"/></svg>
+        </div>
+        <div class="practice-eyebrow">Practice 1 · Most Common</div>
+        <h4 class="practice-name">Cover Crop Establishment</h4>
+        <p class="practice-desc">Planting cover crops on at least 60% of cultivated acres during the off-season. Builds soil organic matter, suppresses weeds, fixes nitrogen biologically, and reduces erosion.</p>
+        <dl class="practice-detail">
+          <dt>Year 1</dt><dd><strong>$75/acre</strong> (covers seed, equipment, learning curve)</dd>
+          <dt>Year 2</dt><dd><strong>$55/acre</strong></dd>
+          <dt>Year 3</dt><dd><strong>$35/acre</strong> (rolls into Title I rate)</dd>
+          <dt>Bonus</dt><dd>+$15/ac for multi-species mix incl. legume</dd>
+        </dl>
+      </div>
+
+      <div class="practice">
+        <div class="practice-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14"/><path d="M24 10 L24 38 M10 24 L38 24 M14 14 L34 34 M34 14 L14 34"/></svg>
+        </div>
+        <div class="practice-eyebrow">Practice 2 · Highest Long-Term Return</div>
+        <h4 class="practice-name">Diverse Crop Rotation</h4>
+        <p class="practice-desc">Moving from a 2-crop rotation to a 4+ crop rotation including a small grain and legume. Breaks pest cycles, reduces synthetic fertilizer need, and stabilizes income across commodities.</p>
+        <dl class="practice-detail">
+          <dt>Year 1</dt><dd><strong>$60/acre</strong></dd>
+          <dt>Year 2</dt><dd><strong>$45/acre</strong></dd>
+          <dt>Year 3</dt><dd><strong>$25/acre</strong> (rolls into Title I rate)</dd>
+          <dt>Bonus</dt><dd>Stacks with Title III diversification index</dd>
+        </dl>
+      </div>
+
+      <div class="practice">
+        <div class="practice-icon">
+          <svg viewBox="0 0 48 48"><path d="M6 36 L42 36 M10 36 L10 30 L14 30 L14 26 L18 26 L18 32 L22 32 L22 28 L26 28 L26 34 L30 34 L30 30 L34 30 L34 36 M16 14 Q24 8 32 14 M20 18 L20 24 M28 18 L28 24"/></svg>
+        </div>
+        <div class="practice-eyebrow">Practice 3 · Most Equipment-Intensive</div>
+        <h4 class="practice-name">Reduced &amp; No-Till Conversion</h4>
+        <p class="practice-desc">Transitioning from conventional tillage to reduced-till or no-till operations. Preserves soil structure, cuts fuel costs, and dramatically reduces erosion. Requires equipment retooling.</p>
+        <dl class="practice-detail">
+          <dt>Year 1</dt><dd><strong>$90/acre</strong> (covers equipment retooling)</dd>
+          <dt>Year 2</dt><dd><strong>$50/acre</strong></dd>
+          <dt>Year 3</dt><dd><strong>$25/acre</strong></dd>
+          <dt>Equipment</dt><dd>One-time grant up to $35K for no-till drill conversion</dd>
+        </dl>
+      </div>
+
+      <div class="practice">
+        <div class="practice-icon">
+          <svg viewBox="0 0 48 48"><path d="M8 32 Q14 24 20 32 Q26 40 32 32 Q38 24 44 32 M12 40 L12 32 M20 40 L20 32 M28 40 L28 32 M36 40 L36 32 M14 14 Q20 10 26 14 M30 14 Q36 10 42 14 M16 18 L16 24 M24 14 L24 22 M32 18 L32 24 M40 14 L40 22"/></svg>
+        </div>
+        <div class="practice-eyebrow">Practice 4 · For Pasture &amp; Mixed Operations</div>
+        <h4 class="practice-name">Managed Rotational Grazing</h4>
+        <p class="practice-desc">Subdividing pasture into paddocks and rotating livestock systematically. Rebuilds organic matter rapidly, restores native plant diversity, sequesters carbon, and reduces feed costs.</p>
+        <dl class="practice-detail">
+          <dt>Year 1</dt><dd><strong>$45/acre</strong> (covers fencing, water systems)</dd>
+          <dt>Year 2</dt><dd><strong>$30/acre</strong></dd>
+          <dt>Year 3</dt><dd><strong>$15/acre</strong></dd>
+          <dt>Infrastructure</dt><dd>Up to $50K cost-share for fencing &amp; water</dd>
+        </dl>
+      </div>
+
+      <div class="practice">
+        <div class="practice-icon">
+          <svg viewBox="0 0 48 48"><path d="M24 8 L24 42 M16 14 Q24 10 32 14 M14 22 Q24 18 34 22 M12 30 Q24 26 36 30 M10 38 Q24 34 38 38"/></svg>
+        </div>
+        <div class="practice-eyebrow">Practice 5 · Permanent Conversion</div>
+        <h4 class="practice-name">Agroforestry &amp; Silvopasture</h4>
+        <p class="practice-desc">Integrating trees and woody perennials with crop or livestock production. Long horizon but compounds over decades. Includes alley cropping, riparian buffer planting, and silvopasture establishment.</p>
+        <dl class="practice-detail">
+          <dt>Years 1–2</dt><dd><strong>$300/acre</strong> establishment payment</dd>
+          <dt>Years 3–5</dt><dd><strong>$150/acre</strong> tending payment</dd>
+          <dt>Long term</dt><dd>Eligible for Title I habitat payments thereafter</dd>
+          <dt>Eligibility</dt><dd>Tier I &amp; II only; Tier III by special application</dd>
+        </dl>
+      </div>
+
+      <div class="practice">
+        <div class="practice-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><path d="M24 6 L24 14 M24 34 L24 42 M6 24 L14 24 M34 24 L42 24 M11 11 L17 17 M31 31 L37 37 M37 11 L31 17 M17 31 L11 37"/></svg>
+        </div>
+        <div class="practice-eyebrow">Practice 6 · Knowledge Infrastructure</div>
+        <h4 class="practice-name">Soil Biology Monitoring</h4>
+        <p class="practice-desc">Annual third-party soil sampling and biological testing to verify and accelerate transition. Produces the data trail that converts the operation to Title I stewardship status after year three.</p>
+        <dl class="practice-detail">
+          <dt>Annual</dt><dd><strong>$8/acre</strong> through verified provider, capped at $4K/yr</dd>
+          <dt>Required</dt><dd>For all transition payments above $25K/yr</dd>
+          <dt>Public data</dt><dd>Anonymized results contribute to USDA soil health database</dd>
+        </dl>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section section-warm reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div>
+        <span class="section-eyebrow">§ 350 · The Bridge Loan Program</span>
+        <h2 class="section-title">For the producers who need more than a payment.</h2>
+      </div>
+    </div>
+
+    <div class="bridge-program">
+      <div class="label">§ 350 · Regenerative Transition Bridge Loan</div>
+      <h3>A federal <em>operating-line</em> loan designed for the cash-flow gap that practice payments alone don't cover.</h3>
+      <p>For producers transitioning more than 60% of their cultivated acres simultaneously, practice payments cover roughly two-thirds of disruption costs but leave a working-capital gap during years one and two. The Bridge Loan program closes that gap with a federally-backed operating line at below-market rates, with principal payments deferred until year four — when the cost-curve crossover begins paying back.</p>
+
+      <div class="bridge-features">
+        <div class="bridge-feature">
+          <div class="num"><em>1.5%</em></div>
+          <div class="name">Interest rate</div>
+          <p>Federal direct-lending rate, fixed for full term. Compares to 7–9% conventional operating loans.</p>
+        </div>
+        <div class="bridge-feature">
+          <div class="num">Up to <em>$400K</em></div>
+          <div class="name">Per operation</div>
+          <p>Loan size scales with acreage transitioned. Tier I producers receive priority; Tier IV ineligible.</p>
+        </div>
+        <div class="bridge-feature">
+          <div class="num">3-yr <em>deferral</em></div>
+          <div class="name">No principal until year 4</div>
+          <p>Interest-only during transition. Full repayment over years 4–10 from realized input savings.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="farmer-quote">
+      <div class="farmer-quote-text">
+        The hardest part wasn't learning what to do. It was the second year, when the cover crop seed bill came in and the corn yield was still 12% under baseline. Without something bridging that gap, you go back to what you know.
+      </div>
+      <div class="farmer-quote-attr">
+        <strong>Hypothetical · Iowa producer, year 2</strong>
+        Composite of testimony from existing transition programs (NRCS, Practical Farmers of Iowa)
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div>
+        <span class="section-eyebrow">Why This Pays For Itself</span>
+        <h2 class="section-title">The federal balance sheet, viewed across a decade.</h2>
+      </div>
+    </div>
+
+    <p style="max-width:820px;font-size:17px;line-height:1.65;color:var(--loam-soft);margin-bottom:30px;">The transition program is structured as a front-loaded investment that reduces ongoing federal liability. Three lines of savings accrue over the ten-year window following enactment.</p>
+
+    <div class="practice-grid">
+      <div class="practice">
+        <div class="practice-eyebrow">Reduction A</div>
+        <h4 class="practice-name">Lower disaster aid &amp; ad-hoc payments.</h4>
+        <p class="practice-desc">Operations with rebuilt soil organic matter and diverse rotations are dramatically more resilient to drought, flood, and pest pressure. CBO modeling of similar transition programs shows 15–25% reductions in federal disaster relief expenditure for participating regions over the decade following full transition.</p>
+        <dl class="practice-detail">
+          <dt>Modeled savings</dt><dd><strong>$2.1B – $3.4B</strong> over 10 years</dd>
+        </dl>
+      </div>
+      <div class="practice">
+        <div class="practice-eyebrow">Reduction B</div>
+        <h4 class="practice-name">Lower water-quality remediation costs.</h4>
+        <p class="practice-desc">Synthetic nitrogen runoff is the dominant driver of Gulf hypoxia, Chesapeake Bay degradation, and groundwater contamination across the Midwest. Reducing synthetic N application by 40% on transitioned acres produces measurable downstream savings in EPA, Army Corps, and state-level remediation budgets.</p>
+        <dl class="practice-detail">
+          <dt>Modeled savings</dt><dd><strong>$800M – $1.6B</strong> over 10 years</dd>
+        </dl>
+      </div>
+      <div class="practice">
+        <div class="practice-eyebrow">Reduction C</div>
+        <h4 class="practice-name">Lower commodity-program payments.</h4>
+        <p class="practice-desc">Diversified operations are less commodity-price-sensitive — they have multiple income streams that move on different cycles. Producers fully transitioned by year five draw less from ARC/PLC and marketing-loan programs in subsequent commodity downturns.</p>
+        <dl class="practice-detail">
+          <dt>Modeled savings</dt><dd><strong>$1.2B – $2.0B</strong> over 10 years</dd>
+        </dl>
+      </div>
+      <div class="practice">
+        <div class="practice-eyebrow">Net</div>
+        <h4 class="practice-name">A self-financing investment by year seven.</h4>
+        <p class="practice-desc">Combined modeled savings of $4.1B–$7.0B over a decade exceed the program's authorized cost of $3.8B over the same window. The Transition Subtitle is the only major program in the Fair Farms Act that scores as deficit-reducing on its own.</p>
+        <dl class="practice-detail">
+          <dt>Net 10-yr impact</dt><dd><strong>+$0.3B to +$3.2B</strong> deficit reduction</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="pull-quote reveal">
+  <p>The cheapest soil to build is the soil you have. The cheapest farmer to keep in business is the one already on the land. The Fair Farms Act spends federal dollars in years one through three so it can spend fewer of them in years four through twenty.</p>
+  <cite>— § 350(a), Findings of the Transition Subtitle</cite>
+</div>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div>
+        <span class="section-eyebrow">Farmer Feedback · What the Research Missed</span>
+        <h2 class="section-title">The system doesn't reach the smallest producers at all.</h2>
+      </div>
+    </div>
+
+    <p style="max-width:820px;font-size:17px;line-height:1.65;color:var(--loam-soft);margin-bottom:20px;">Feedback from a local farm using sustainable practices revealed a gap the original design had not accounted for: their gross cash farm income falls below any threshold that would qualify them for the programs built around the Tier I classification. Per-acre stewardship payments on a small operation round down to a payment too small to affect decision-making. The two additions below address that gap directly.</p>
+
+    <!-- DIRECT EQUIPMENT AND MATERIALS GRANT -->
+    <div class="grant-callout">
+      <div class="label">§ 351 · Direct Equipment &amp; Materials Grant</div>
+      <h3>Up to <em>$8,000</em> per year — farmer chooses what they need.</h3>
+      <p class="sub">A flat, non-competitive grant covering the full cost of specific items a farm needs to operate. No per-acre calculation. No minimum revenue. No percentage match. If you have documented farming activity, you qualify — and you choose what gets covered based on what you don't already have.</p>
+
+      <div class="grant-key-fact">
+        <div class="big">$8,000</div>
+        <div class="desc">
+          <strong>Per farm, per year.</strong> No GCFI floor. No acreage minimum. Any producer with documented farming activity is eligible regardless of scale. If you already have a seed-starting greenhouse, you don't apply for that — you apply for your cover crop materials instead.
+        </div>
+      </div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--harvest-deep);margin-bottom:14px;">Eligible Items — Farmer Selects Based on What They Need</div>
+
+      <div class="grant-items">
+        <div class="grant-item">
+          <div class="grant-item-icon">🌱</div>
+          <div class="grant-item-name">Cover Crop Seed &amp; Inoculant</div>
+          <div class="grant-item-desc">Full cost of seed and biological inoculant for cover crop establishment. Species mix at farmer's discretion.</div>
+        </div>
+        <div class="grant-item">
+          <div class="grant-item-icon">💧</div>
+          <div class="grant-item-name">Drip Irrigation &amp; Watering Systems</div>
+          <div class="grant-item-desc">Drip tape, emitters, timers, mainline, and installation hardware for field or row crop irrigation.</div>
+        </div>
+        <div class="grant-item">
+          <div class="grant-item-icon">🏠</div>
+          <div class="grant-item-name">Seed-Starting Greenhouse Materials</div>
+          <div class="grant-item-desc">Hoop house kits, low tunnel materials, row cover fabric, and seedling trays for season extension.</div>
+        </div>
+        <div class="grant-item">
+          <div class="grant-item-icon">🧪</div>
+          <div class="grant-item-name">Soil Testing Equipment</div>
+          <div class="grant-item-desc">Lab testing kits, probes, or third-party soil biological assessments. Baseline data for transition planning.</div>
+        </div>
+        <div class="grant-item">
+          <div class="grant-item-icon">🍂</div>
+          <div class="grant-item-name">Composting Infrastructure</div>
+          <div class="grant-item-desc">Bins, turners, thermometers, and carbon materials for on-farm compost production.</div>
+        </div>
+        <div class="grant-item">
+          <div class="grant-item-icon">🔧</div>
+          <div class="grant-item-name">Hand Tools &amp; Market Garden Equipment</div>
+          <div class="grant-item-desc">Scale-appropriate tools for market garden and small-plot operations: broadforks, seeders, wheel hoes, harvesting equipment.</div>
+        </div>
+      </div>
+
+      <div class="grant-how">
+        <span class="label">How It Works</span>
+        <p>At enrollment, the producer submits a simple checklist of what they already have from the eligible items list. The grant covers the full purchase cost of selected items they don't already have, up to the $8,000 annual limit. Items can be split across multiple categories — a farm that needs irrigation and cover crop seed can apply for both. The grant renews annually, allowing farmers to build out their infrastructure one piece at a time based on evolving needs.</p>
+        <p>This design came directly from stakeholder feedback: <em>"If they already have a greenhouse for starting seeds, they can have their material for cover crops paid for."</em> The farmer chooses, the system pays.</p>
+      </div>
+    </div>
+
+    <!-- MINIMUM STEWARDSHIP FLOOR -->
+    <div class="floor-callout">
+      <div class="floor-num">$2K</div>
+      <div>
+        <h4>Minimum Stewardship Payment — Tier I Flat Floor</h4>
+        <p>Per-acre stewardship payments on a 3-acre market garden produce less than $200 per year — less than the cost of enrolling in the program. The minimum floor fixes this by guaranteeing every enrolled Tier I producer at least $2,000 per year in stewardship payments, regardless of acreage. If the per-acre calculation produces more, the higher amount applies. If it produces less, the floor kicks in. No small farm walks away with a payment that doesn't cover its own paperwork.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="page-foot">
+  <div class="page-foot-inner">
+    <button data-tab="programs"><span class="label">← Previous</span><span class="target">Page IV · The Programs</span></button>
+    <button data-tab="urban" class="next"><span class="label">Next →</span><span class="target">Page VI · Urban Harvest</span></button>
+  </div>
+</footer>
+
+</section>
+
+<!-- ============ TAB: URBAN ============ -->
+<section class="tab-panel" id="panel-urban">
+
+<header class="urban-hero">
+  <div class="urban-hero-inner">
+    <div class="page-eyebrow">Title VII · The Innovation Track</div>
+    <h1 class="page-title">A new track for the cities — and the corporations <em>that can build there.</em></h1>
+    <p class="page-deck">The Fair Farms Act takes a deliberately different approach with industrial-scale capital. Rather than letting it crowd out small operators on rural land, Title VII opens a parallel program designed to channel large-firm investment toward controlled-environment agriculture, urban food systems, and the technological frontier of farming.</p>
+    <div class="vertical-illustration">
+      <div class="illustration-art">
+        <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="290" x2="600" y2="290" stroke="#c89732" stroke-width="1"/>
+          <g stroke="#c89732" stroke-width="1.2" fill="none">
+            <rect x="60" y="110" width="120" height="180"/>
+            <line x1="60" y1="140" x2="180" y2="140" stroke-width="0.8"/>
+            <line x1="60" y1="170" x2="180" y2="170" stroke-width="0.8"/>
+            <line x1="60" y1="200" x2="180" y2="200" stroke-width="0.8"/>
+            <line x1="60" y1="230" x2="180" y2="230" stroke-width="0.8"/>
+            <line x1="60" y1="260" x2="180" y2="260" stroke-width="0.8"/>
+            <g fill="#5c6b3c" stroke="none">
+              <circle cx="80" cy="125" r="2"/><circle cx="100" cy="125" r="2"/><circle cx="120" cy="125" r="2"/><circle cx="140" cy="125" r="2"/><circle cx="160" cy="125" r="2"/>
+              <circle cx="80" cy="155" r="2"/><circle cx="100" cy="155" r="2"/><circle cx="120" cy="155" r="2"/><circle cx="140" cy="155" r="2"/><circle cx="160" cy="155" r="2"/>
+              <circle cx="80" cy="185" r="2"/><circle cx="100" cy="185" r="2"/><circle cx="120" cy="185" r="2"/><circle cx="140" cy="185" r="2"/><circle cx="160" cy="185" r="2"/>
+              <circle cx="80" cy="215" r="2"/><circle cx="100" cy="215" r="2"/><circle cx="120" cy="215" r="2"/><circle cx="140" cy="215" r="2"/><circle cx="160" cy="215" r="2"/>
+              <circle cx="80" cy="245" r="2"/><circle cx="100" cy="245" r="2"/><circle cx="120" cy="245" r="2"/><circle cx="140" cy="245" r="2"/><circle cx="160" cy="245" r="2"/>
+              <circle cx="80" cy="275" r="2"/><circle cx="100" cy="275" r="2"/><circle cx="120" cy="275" r="2"/><circle cx="140" cy="275" r="2"/><circle cx="160" cy="275" r="2"/>
+            </g>
+          </g>
+          <g stroke="#c89732" stroke-width="0.8" fill="none">
+            <line x1="60" y1="100" x2="180" y2="100"/>
+            <line x1="70" y1="100" x2="70" y2="110"/><line x1="90" y1="100" x2="90" y2="110"/><line x1="110" y1="100" x2="110" y2="110"/><line x1="130" y1="100" x2="130" y2="110"/><line x1="150" y1="100" x2="150" y2="110"/><line x1="170" y1="100" x2="170" y2="110"/>
+          </g>
+          <g stroke="#c89732" stroke-width="1.2" fill="none">
+            <rect x="240" y="60" width="120" height="230"/>
+            <line x1="240" y1="90" x2="360" y2="90" stroke-width="0.8"/>
+            <line x1="240" y1="120" x2="360" y2="120" stroke-width="0.8"/>
+            <line x1="240" y1="150" x2="360" y2="150" stroke-width="0.8"/>
+            <line x1="240" y1="180" x2="360" y2="180" stroke-width="0.8"/>
+            <line x1="240" y1="210" x2="360" y2="210" stroke-width="0.8"/>
+            <line x1="240" y1="240" x2="360" y2="240" stroke-width="0.8"/>
+            <line x1="240" y1="270" x2="360" y2="270" stroke-width="0.8"/>
+            <g fill="#5c6b3c" stroke="none">
+              <circle cx="260" cy="75" r="2"/><circle cx="280" cy="75" r="2"/><circle cx="300" cy="75" r="2"/><circle cx="320" cy="75" r="2"/><circle cx="340" cy="75" r="2"/>
+              <circle cx="260" cy="105" r="2"/><circle cx="280" cy="105" r="2"/><circle cx="300" cy="105" r="2"/><circle cx="320" cy="105" r="2"/><circle cx="340" cy="105" r="2"/>
+              <circle cx="260" cy="135" r="2"/><circle cx="280" cy="135" r="2"/><circle cx="300" cy="135" r="2"/><circle cx="320" cy="135" r="2"/><circle cx="340" cy="135" r="2"/>
+              <circle cx="260" cy="165" r="2"/><circle cx="280" cy="165" r="2"/><circle cx="300" cy="165" r="2"/><circle cx="320" cy="165" r="2"/><circle cx="340" cy="165" r="2"/>
+              <circle cx="260" cy="195" r="2"/><circle cx="280" cy="195" r="2"/><circle cx="300" cy="195" r="2"/><circle cx="320" cy="195" r="2"/><circle cx="340" cy="195" r="2"/>
+              <circle cx="260" cy="225" r="2"/><circle cx="280" cy="225" r="2"/><circle cx="300" cy="225" r="2"/><circle cx="320" cy="225" r="2"/><circle cx="340" cy="225" r="2"/>
+              <circle cx="260" cy="255" r="2"/><circle cx="280" cy="255" r="2"/><circle cx="300" cy="255" r="2"/><circle cx="320" cy="255" r="2"/><circle cx="340" cy="255" r="2"/>
+            </g>
+            <line x1="240" y1="50" x2="360" y2="50"/>
+            <line x1="250" y1="50" x2="250" y2="60"/><line x1="270" y1="50" x2="270" y2="60"/><line x1="290" y1="50" x2="290" y2="60"/><line x1="310" y1="50" x2="310" y2="60"/><line x1="330" y1="50" x2="330" y2="60"/><line x1="350" y1="50" x2="350" y2="60"/>
+          </g>
+          <g stroke="#c89732" stroke-width="1.2" fill="none">
+            <rect x="420" y="140" width="120" height="150"/>
+            <line x1="420" y1="170" x2="540" y2="170" stroke-width="0.8"/>
+            <line x1="420" y1="200" x2="540" y2="200" stroke-width="0.8"/>
+            <line x1="420" y1="230" x2="540" y2="230" stroke-width="0.8"/>
+            <line x1="420" y1="260" x2="540" y2="260" stroke-width="0.8"/>
+            <g fill="#5c6b3c" stroke="none">
+              <circle cx="440" cy="155" r="2"/><circle cx="460" cy="155" r="2"/><circle cx="480" cy="155" r="2"/><circle cx="500" cy="155" r="2"/><circle cx="520" cy="155" r="2"/>
+              <circle cx="440" cy="185" r="2"/><circle cx="460" cy="185" r="2"/><circle cx="480" cy="185" r="2"/><circle cx="500" cy="185" r="2"/><circle cx="520" cy="185" r="2"/>
+              <circle cx="440" cy="215" r="2"/><circle cx="460" cy="215" r="2"/><circle cx="480" cy="215" r="2"/><circle cx="500" cy="215" r="2"/><circle cx="520" cy="215" r="2"/>
+              <circle cx="440" cy="245" r="2"/><circle cx="460" cy="245" r="2"/><circle cx="480" cy="245" r="2"/><circle cx="500" cy="245" r="2"/><circle cx="520" cy="245" r="2"/>
+              <circle cx="440" cy="275" r="2"/><circle cx="460" cy="275" r="2"/><circle cx="480" cy="275" r="2"/><circle cx="500" cy="275" r="2"/><circle cx="520" cy="275" r="2"/>
+            </g>
+            <line x1="420" y1="130" x2="540" y2="130"/>
+            <line x1="430" y1="130" x2="430" y2="140"/><line x1="450" y1="130" x2="450" y2="140"/><line x1="470" y1="130" x2="470" y2="140"/><line x1="490" y1="130" x2="490" y2="140"/><line x1="510" y1="130" x2="510" y2="140"/><line x1="530" y1="130" x2="530" y2="140"/>
+          </g>
+          <g stroke="#c89732" stroke-width="1" fill="none">
+            <rect x="110" y="270" width="20" height="20"/>
+            <rect x="290" y="270" width="20" height="20"/>
+            <rect x="470" y="270" width="20" height="20"/>
+          </g>
+          <text x="120" y="305" font-family="JetBrains Mono" font-size="9" fill="#c89732" text-anchor="middle" letter-spacing="2">CHICAGO</text>
+          <text x="300" y="305" font-family="JetBrains Mono" font-size="9" fill="#c89732" text-anchor="middle" letter-spacing="2">DETROIT</text>
+          <text x="480" y="305" font-family="JetBrains Mono" font-size="9" fill="#c89732" text-anchor="middle" letter-spacing="2">CLEVELAND</text>
+        </svg>
+      </div>
+      <div class="illustration-text">
+        <strong>Why parallel rather than additive?</strong>
+        Title VII recipients cannot also draw Title I commodity support — the anti-substitution clause at § 707 prevents arbitrage between rural commodity payments and urban tax credits. A corporation that wants to participate in federal agriculture programs at scale chooses one track or the other.
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <span class="section-eyebrow">Title VII · Section by Section</span>
+        <h2 class="section-title">Seven provisions, structured to channel capital where it serves the public.</h2>
+      </div>
+    </div>
+    <div class="provisions">
+      <div class="provision-row">
+        <div class="prov-section">§ 701</div>
+        <div>
+          <div class="prov-name">Vertical Farm Construction Credit</div>
+          <p class="prov-desc">A 40% federal tax credit on capital expenditure for indoor vertical farms, hydroponic, aeroponic, and aquaponic facilities sited in census tracts designated as food-access priority areas.</p>
+        </div>
+        <div class="prov-detail"><strong>Cap &amp; Eligibility</strong>$25M maximum credit per facility. Must be sited in a food-access priority tract as designated by USDA in consultation with HUD. Construction must commence within 24 months of credit certification.</div>
+      </div>
+      <div class="provision-row">
+        <div class="prov-section">§ 702</div>
+        <div>
+          <div class="prov-name">Adaptive Reuse Bonus</div>
+          <p class="prov-desc">An additional 15% credit if the facility occupies a vacant industrial, retail, or commercial structure rather than new construction.</p>
+        </div>
+        <div class="prov-detail"><strong>Qualifying Structures</strong>Buildings vacant or substantially underutilized for 24+ months. Industrial warehouses, big-box retail, obsolete office buildings explicitly qualify. Stacks with § 701.</div>
+      </div>
+      <div class="provision-row">
+        <div class="prov-section">§ 703</div>
+        <div>
+          <div class="prov-name">Renewable Power Tie</div>
+          <p class="prov-desc">Credits available only to facilities sourcing at least 70% of energy from on-site or contracted renewable generation in year one, scaling to 100% by year seven.</p>
+        </div>
+        <div class="prov-detail"><strong>Schedule</strong>Year 1–2: 70% renewable. Year 3–4: 80%. Year 5–6: 90%. Year 7+: 100%. Failure triggers credit recapture and program disqualification.</div>
+      </div>
+      <div class="provision-row">
+        <div class="prov-section">§ 704</div>
+        <div>
+          <div class="prov-name">Urban Producer Purchase Guarantee</div>
+          <p class="prov-desc">Federal feeding programs commit to purchasing $400 million annually in produce from Title VII facilities for the first decade of the program.</p>
+        </div>
+        <div class="prov-detail"><strong>Buyer Programs</strong>DOD commissaries and military feeding, VA hospital systems, federal cafeteria contracts, and BIA boarding-school nutrition programs.</div>
+      </div>
+      <div class="provision-row">
+        <div class="prov-section">§ 705</div>
+        <div>
+          <div class="prov-name">Public Research Pipeline</div>
+          <p class="prov-desc">Recipients must publish anonymized yield, energy-use, water-use, and operating-cost data to a USDA open-data portal.</p>
+        </div>
+        <div class="prov-detail"><strong>Reporting</strong>Quarterly anonymized data submission. Trade-secret protection for proprietary cultivars and software, but operating metrics are public. ARS administers the portal.</div>
+      </div>
+      <div class="provision-row">
+        <div class="prov-section">§ 706</div>
+        <div>
+          <div class="prov-name">Living Wage &amp; Local Hire</div>
+          <p class="prov-desc">Eligibility conditioned on paying not less than 1.4× local prevailing wage and sourcing at least 60% of workforce from within 25 miles of the facility.</p>
+        </div>
+        <div class="prov-detail"><strong>Compliance</strong>Annual wage and hire audit by Labor in coordination with USDA. Violations trigger credit clawback and three-year disqualification from federal procurement.</div>
+      </div>
+      <div class="provision-row">
+        <div class="prov-section">§ 707</div>
+        <div>
+          <div class="prov-name">Anti-Substitution Clause</div>
+          <p class="prov-desc">Title VII funds cannot be drawn by an entity that simultaneously holds Title I support — preventing arbitrage between rural commodity payments and urban tax credits.</p>
+        </div>
+        <div class="prov-detail"><strong>Attribution</strong>Applies through full ownership chain. An LLC subsidiary of a Title I-participating corporation cannot draw Title VII credits.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-warm reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <span class="section-eyebrow">Worked Example · A Tier IV Operator's Two Paths</span>
+        <h2 class="section-title">For the largest agricultural firms, Title VII is where productive federal partnership lives.</h2>
+      </div>
+    </div>
+    <p style="max-width:820px;font-size:17px;line-height:1.6;color:var(--loam-soft);">A multi-state commodity firm with $40M in annual GCFI is excluded from ARC, PLC, and most Title I programs under the Fair Farms Act. Title VII opens an alternative: build a $20M vertical farming facility in a designated food-access priority tract in Cleveland, Ohio, occupying a vacant former auto-parts manufacturing building.</p>
+    <div class="case-study">
+      <div class="label">Hypothetical · Cleveland Vertical Greens Facility</div>
+      <h3>$20M facility, adaptive reuse, 100% renewable target by year 7. <em>What does the federal stack look like?</em></h3>
+      <div class="case-grid">
+        <div class="case-cell"><div class="h">§ 701 Construction Credit</div><div class="v">$8.0M<small>40% × $20M capital expenditure, claimed against federal income tax</small></div></div>
+        <div class="case-cell"><div class="h">§ 702 Adaptive Reuse Bonus</div><div class="v">$3.0M<small>15% × $20M, qualifying vacant industrial structure</small></div></div>
+        <div class="case-cell"><div class="h">§ 704 Procurement Guarantee</div><div class="v">~$1.2M / year<small>Federal purchase commitment, allocated by USDA solicitation</small></div></div>
+        <div class="case-cell"><div class="h">Workforce Requirement</div><div class="v">~$22/hr min.<small>1.4× Cleveland prevailing produce-handler wage; 60% local hire</small></div></div>
+      </div>
+      <div class="case-total">Total federal partnership: <strong>$11M up-front + $1.2M/yr × 10 years = ~$23M over decade</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <span class="section-eyebrow">The Conditions · Why Title VII Doesn't Become a Giveaway</span>
+        <h2 class="section-title">The credits come with conditions designed to keep the program honest.</h2>
+      </div>
+    </div>
+    <div class="conditions">
+      <h3>Recipients of Title VII credits must agree to all of the following:</h3>
+      <ul>
+        <li><span><strong>Site eligibility.</strong> Facility must be located in a USDA-designated food-access priority census tract.</span></li>
+        <li><span><strong>Renewable power escalator.</strong> 70% renewable energy in years 1–2, scaling to 100% by year 7.</span></li>
+        <li><span><strong>Living wage floor.</strong> All workers paid at minimum 1.4× local prevailing wage.</span></li>
+        <li><span><strong>Local hire commitment.</strong> At least 60% of workforce sourced from within 25 miles.</span></li>
+        <li><span><strong>Public data contribution.</strong> Anonymized operating metrics published quarterly to USDA's CEA Open Data Portal.</span></li>
+        <li><span><strong>Sole-track participation.</strong> Cannot simultaneously draw Title I commodity payments through any owned subsidiary.</span></li>
+        <li class="no"><span><strong>Not eligible if:</strong> the entity, parent, or any subsidiary holds an existing ARC/PLC contract.</span></li>
+        <li class="no"><span><strong>Not eligible if:</strong> the entity is using Title VII as a substitute for residential or commercial development that would otherwise occur (anti-displacement).</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="page-foot">
+  <div class="page-foot-inner">
+    <button data-tab="regenerative"><span class="label">← Previous</span><span class="target">Page V · Regenerative Transition</span></button>
+    <button data-tab="proposal" class="next" style="color: var(--harvest-deep);"><span class="label" style="color: var(--harvest-deep);">Next →</span><span class="target">Page VII · The Full Proposal</span></button>
+  </div>
+</footer>
+
+</section>
+
+<!-- ============ TAB: PROPOSAL ============ -->
+<section class="tab-panel" id="panel-proposal">
+
+<section class="bill-cover">
+  <div class="bill-cover-inner">
+    <div class="congress-bar">
+      <div class="left">119<sup>th</sup> Congress · 2<sup>nd</sup> Session</div>
+      <div class="center">⬢ Calendar No. 1138 ⬢</div>
+      <div class="right">Discussion Draft · April 2026</div>
+    </div>
+    <div class="bill-num">S. <em>2401</em></div>
+    <div class="bill-subnum">In the Senate of the United States · Committee on Agriculture, Nutrition, and Forestry</div>
+    <div class="a-bill">A B I L L</div>
+    <p class="bill-purpose">To restructure the federal agricultural support system; to redirect public investment toward small and mid-sized producers; to reward ecological stewardship and crop diversification; to seed a new generation of urban food infrastructure; and for other purposes.</p>
+    <div class="ornament">❦ ❦ ❦</div>
+    <div class="introduced-by">
+      <span class="label">Introduced by</span>
+      Mr./Ms. [Sponsor], for himself/herself and others, read twice and referred to the Committee on Agriculture, Nutrition, and Forestry, and ordered to be printed for the consideration of the Senate.
+    </div>
+  </div>
+</section>
+
+<section class="toc">
+  <div class="toc-inner">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list">
+      <li><span class="roman">Title I</span><span class="label">Short Title, Findings, and Definitions</span><span class="pg">§ 101–103</span></li>
+      <li><span class="roman">Title II</span><span class="label">Producer Tier &amp; Eligibility</span><span class="pg">§ 201–207</span></li>
+      <li><span class="roman">Title III</span><span class="label">Stewardship &amp; Diversification</span><span class="pg">§ 301–305</span></li>
+      <li><span class="roman">Title IV</span><span class="label">Reformed Risk Management</span><span class="pg">§ 401–406</span></li>
+      <li><span class="roman">Title V</span><span class="label">Land Access &amp; Generational Transition</span><span class="pg">§ 501–504</span></li>
+      <li><span class="roman">Title VI</span><span class="label">Regional Infrastructure &amp; Cooperatives</span><span class="pg">§ 601–603</span></li>
+      <li><span class="roman">Title VII</span><span class="label">Urban Harvest &amp; Innovation Track</span><span class="pg">§ 701–707</span></li>
+      <li><span class="roman">Title VIII</span><span class="label">Transition, Effective Dates, and Repeals</span><span class="pg">§ 801–805</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="bill-body">
+  <div class="bill-body-inner">
+
+    <p class="preamble">
+      <span class="smallcaps">Be it enacted by the Senate and House of Representatives of the United States of America in Congress assembled,</span>
+      That this Act, with the following titles, sections, and provisions, shall constitute a comprehensive restructuring of Title I of the Agriculture Improvement Act of 2018, the commodity provisions of the One Big Beautiful Bill Act of 2025, and the Federal Crop Insurance Act, as amended.
+    </p>
+
+    <div class="title-heading"><span class="roman">Title I</span><h2>Short Title, <em>Findings</em>, and Definitions</h2></div>
+
+    <div class="bill-section"><span class="num">Sec. 101</span><h3>Short Title.</h3></div>
+    <p>This Act may be cited as the "<strong>Fair Farms Act of 2026</strong>."</p>
+
+    <div class="bill-section"><span class="num">Sec. 102</span><h3>Findings.</h3></div>
+    <p>Congress finds the following:</p>
+    <ol class="findings">
+      <li>The largest 4 percent of United States farms, defined by gross cash farm income exceeding $1,000,000, account for 48 percent of the value of agricultural production but operate fewer than one-third of agricultural acres.</li>
+      <li>The largest 10 percent of farms collect approximately two-thirds of all payments under the Agriculture Risk Coverage program, the Price Loss Coverage program, and federal crop insurance premium subsidies, while the smallest 86 percent of operations receive a residual share.</li>
+      <li>Federal crop insurance premium subsidies are uncapped, are not subject to any adjusted gross income limitation, and are statutorily confidential at the recipient level under section 502(c) of the Federal Crop Insurance Act, denying the public any visibility into the largest single subsidy stream in the agricultural support system.</li>
+      <li>The exemption for family-member operations at section 1604 of the Agricultural Act of 2014 forbids the Secretary of Agriculture from applying tightened active-engagement rules to operations comprised solely of family members, and because 96 percent of United States farms are organized as family operations, the exemption swallows the rule it accompanies.</li>
+      <li>The general partnership and joint venture exception at section 1308(b) of title 7, United States Code, permits operations to multiply payment limitations by the number of partners, frustrating the statutory cap on its face.</li>
+      <li>Median household income for operators of large-scale family farms exceeded $410,000 in 2024, well above the threshold at which a federal safety net is reasonably justified.</li>
+      <li>The shape of the American countryside is not destiny. It is the precipitate of the choices Congress makes about who receives federal support.</li>
+    </ol>
+
+    <div class="bill-section"><span class="num">Sec. 103</span><h3>Definitions.</h3></div>
+    <p>In this Act:</p>
+    <dl class="definitions">
+      <dt>Operation</dt><dd>The term "<em>operation</em>" means a unit of agricultural production under common management, regardless of the number of legal entities through which the operation is organized, and includes any affiliated entity sharing equipment, labor, marketing, or land-management decisions with the primary operator.</dd>
+      <dt>Tier</dt><dd>The term "<em>tier</em>" means one of the four producer classifications established under section 202.</dd>
+      <dt>Stewardship Practice</dt><dd>The term "<em>stewardship practice</em>" means an agricultural practice qualifying for payment under Title III of this Act, including cover cropping, multi-crop rotation, soil organic matter improvement, and pollinator and riparian habitat establishment.</dd>
+      <dt>Food-Access Priority Tract</dt><dd>The term "<em>food-access priority tract</em>" means a census tract designated by the Secretary, in consultation with the Secretary of Housing and Urban Development, as having limited access to fresh produce retail and median household income below 80 percent of area median.</dd>
+      <dt>Beginning Producer</dt><dd>The term "<em>beginning producer</em>" means a producer who has been actively engaged in farming for not more than 10 years preceding the date of application.</dd>
+    </dl>
+
+    <div class="title-heading"><span class="roman">Title II</span><h2>Producer <em>Tier</em> &amp; Eligibility</h2></div>
+
+    <div class="bill-section"><span class="num">Sec. 201</span><h3>Repeal of Family Member Exemption.</h3></div>
+    <p>Section 1604(b) of the Agricultural Act of 2014 (Public Law 113-79) is hereby repealed in its entirety. The Secretary shall apply all eligibility regulations promulgated under this title uniformly, without regard to the family relationship of the participants in any farming operation.</p>
+
+    <div class="bill-section"><span class="num">Sec. 202</span><h3>Establishment of Producer Tiers.</h3></div>
+    <p>Section 1308 of title 7, United States Code, is amended by adding the following at the end:</p>
+    <p class="indent">"(j) <strong>Producer Tier Classification.</strong>—For purposes of administering all programs under this title and titles I and XI of the Agriculture Improvement Act of 2018, as amended, the Secretary shall classify each operation into one of the following four tiers:</p>
+    <p class="indent-2">"(1) <strong>Tier I — Beginning &amp; Small Producers</strong>: Operations with GCFI of less than $350,000.</p>
+    <p class="indent-2">"(2) <strong>Tier II — Mid-Size Producers</strong>: Operations with GCFI of $350,000 to $1,000,000.</p>
+    <p class="indent-2">"(3) <strong>Tier III — Large Producers</strong>: Operations with GCFI of $1,000,000 to $5,000,000.</p>
+    <p class="indent-2">"(4) <strong>Tier IV — Industrial Producers</strong>: Operations with GCFI exceeding $5,000,000.</p>
+
+    <div class="bill-section"><span class="num">Sec. 203</span><h3>Active Engagement; The Thousand-Hour Test.</h3></div>
+    <p>Section 1308–1(b)(2)(A) of title 7, United States Code, is amended:</p>
+    <div class="stat-edit">
+      <span class="meta">Statutory Edit · 7 U.S.C. § 1308-1(b)(2)(A)</span>
+      "(A) a person... shall be considered to be actively engaged in farming with respect to a farming operation if—
+      <br>(i) the person makes a significant contribution (based on the total value of the farming operation) of—
+      <br>(I) capital, equipment, or land<span class="strike">, or a combination thereof</span>; and
+      <br>(II) <span class="strike">personal labor or active personal management;</span> <span class="add">personal labor or on-site management of not less than 1,000 hours per crop year, documented by payroll records, tax filings, or contemporaneous logs; remote management activity, including communications conducted from a location more than 50 miles from the principal place of the operation, shall not count toward the 1,000-hour threshold;</span>"
+    </div>
+    <p>The Secretary shall promulgate implementing regulations within 180 days of enactment, and the regulations shall apply uniformly to all operations regardless of the family relationship of the participants.</p>
+
+    <div class="bill-section"><span class="num">Sec. 204</span><h3>Anti-Circumvention; Common Management Aggregation.</h3></div>
+    <p>The Secretary shall promulgate regulations identifying common management across two or more legal entities through, at minimum, the following indicia: (1) shared equipment use; (2) shared labor or payroll; (3) shared marketing or grain storage; (4) shared land-management decision-making; (5) common addresses of beneficial owners; (6) shared FSA records; (7) overlapping principal operators; (8) shared crop insurance agents; (9) common bank accounts; (10) any other factors indicative of common management.</p>
+    <p>Operations identified as under common management shall be aggregated as a single operation for purposes of tier classification, payment limitations, and program eligibility. Wilful misrepresentation shall constitute a Class B violation, triggering five-year program disqualification and full clawback of all federal payments received.</p>
+
+    <div class="bill-section"><span class="num">Sec. 207</span><h3>Repeal of the Partnership Multiplier.</h3></div>
+    <p>Section 1308(b) of title 7, United States Code, is amended:</p>
+    <div class="stat-edit">
+      <span class="meta">Statutory Edit · 7 U.S.C. § 1308(b)</span>
+      "The total amount of payments received, directly or indirectly, by a person or legal entity <span class="strike">(except a joint venture or general partnership)</span> for any crop year under [the relevant programs]... may not exceed <span class="strike">$155,000</span> <span class="add">the applicable tier ceiling established under section 202.</span>"
+    </div>
+
+    <div class="title-heading"><span class="roman">Title III</span><h2>Stewardship &amp; <em>Diversification</em></h2></div>
+
+    <div class="bill-section"><span class="num">Sec. 301</span><h3>Replacement of ARC and PLC.</h3></div>
+    <p>The Agriculture Risk Coverage and Price Loss Coverage programs are replaced as the primary commodity-support architecture by the practice-based payment system established under this title. Existing contracts shall be honored through the natural term of the contract.</p>
+
+    <div class="bill-section"><span class="num">Sec. 302</span><h3>Stewardship Practice Payments.</h3></div>
+    <p>The Secretary shall make annual payments to eligible producers for the verified implementation of stewardship practices, calculated as follows:</p>
+    <p class="indent">(1) <strong>Cover Cropping Premium.</strong>—$35 per acre for cover crops planted on at least 60 percent of cultivated acres, increased to $55 per acre for multi-species cover crop mixes including at least one legume.</p>
+    <p class="indent">(2) <strong>Rotation Diversity Bonus.</strong>—$25 per acre for documented three-crop rotations; $50 per acre for four-or-more-crop rotations including at least one small grain or legume.</p>
+    <p class="indent">(3) <strong>Soil Carbon Performance Payment.</strong>—A per-ton payment scaling with the verified increase in soil organic matter, measured on five-year cycles by an approved third-party verifier.</p>
+    <p class="indent">(4) <strong>Pollinator and Riparian Habitat Payment.</strong>—$200 per acre for buffer strips, native plantings, and edge habitat exceeding the minimums established by the NRCS.</p>
+
+    <div class="bill-section"><span class="num">Sec. 303</span><h3>Diversification Index.</h3></div>
+    <p>Stewardship payments shall be increased by the following percentages:</p>
+    <p class="indent">(1) Two commodities or fewer: no bonus.</p>
+    <p class="indent">(2) Three commodities: 10 percent.</p>
+    <p class="indent">(3) Four commodities including at least one small grain: 20 percent.</p>
+    <p class="indent">(4) Five or more commodities including at least one legume and one perennial: 35 percent.</p>
+
+    <div class="title-heading"><span class="roman">Title IV</span><h2>Reformed <em>Risk Management</em></h2></div>
+
+    <div class="bill-section"><span class="num">Sec. 401</span><h3>Premium Subsidy Reform.</h3></div>
+    <p>Section 508(b) of the Federal Crop Insurance Act is amended such that federal premium subsidies on crop insurance shall be tier-graduated as follows:</p>
+    <p class="indent">(1) <strong>Tier I:</strong> 80 percent premium subsidy, with no producer deductible on the first $50,000 of indemnities.</p>
+    <p class="indent">(2) <strong>Tier II:</strong> 65 percent premium subsidy.</p>
+    <p class="indent">(3) <strong>Tier III:</strong> 45 percent premium subsidy.</p>
+    <p class="indent">(4) <strong>Tier IV:</strong> 35 percent premium subsidy, subject to an absolute cap of $125,000 per operation per crop year.</p>
+
+    <div class="bill-section"><span class="num">Sec. 403</span><h3>Repeal of Recipient Confidentiality.</h3></div>
+    <p>Section 502(c) of the Federal Crop Insurance Act is hereby repealed. The Risk Management Agency shall publish, not later than one year after the date of enactment, an annual public database of all recipients of federal premium subsidies, including the name of the recipient, the operation, the legal-entity ownership chain, and the dollar amount of subsidies received.</p>
+
+    <div class="title-heading"><span class="roman">Titles V – VII</span><h2>Land, <em>Infrastructure</em>, and Innovation</h2></div>
+
+    <p>Sections 501 through 504 establish the Beginning Farmer Land Trust, the Retiring Farmer Bonus, the Anti-Speculation Surcharge, and Tribal Land Reacquisition. Sections 601 through 603 establish Regional Processing Grants, the Local Procurement Mandate (30% sourcing within 250 miles by FY 2032), and the Cooperative Capitalization Fund. Sections 701 through 707 establish the Urban Harvest credits with renewable-power, living-wage, local-hire, and anti-substitution conditions.</p>
+
+    <p style="font-style:italic;color:var(--loam-soft);">Full text of Titles V, VI, and VII appears in Volume II of the printed bill, available upon request from the Committee.</p>
+
+    <div class="title-heading"><span class="roman">Title VIII</span><h2>Transition, <em>Effective Dates</em>, and Repeals</h2></div>
+
+    <div class="bill-section"><span class="num">Sec. 801</span><h3>Effective Dates.</h3></div>
+    <p>Except as otherwise specified, the amendments and provisions of this Act shall take effect according to the following schedule:</p>
+    <div class="schedule">
+      <div class="schedule-row"><div class="schedule-when">Crop Year 2027</div><div class="schedule-what">Tier classification system, 1,000-hour active engagement test, Title IV crop insurance reforms, recipient transparency provisions.</div></div>
+      <div class="schedule-row"><div class="schedule-when">Crop Year 2028</div><div class="schedule-what">Title VII Urban Harvest credit becomes available for new construction.</div></div>
+      <div class="schedule-row"><div class="schedule-when">Crop Year 2029</div><div class="schedule-what">Title V Beginning Farmer Land Trust fully operational; Local Procurement Mandate begins phase-in.</div></div>
+      <div class="schedule-row"><div class="schedule-when">Crop Year 2032</div><div class="schedule-what">Base acres fully sunset. Stewardship payments fully replace ARC/PLC architecture.</div></div>
+      <div class="schedule-row"><div class="schedule-when">Crop Year 2036</div><div class="schedule-what">Local Procurement Mandate reaches statutory ceiling of 50%.</div></div>
+    </div>
+
+    <div class="bill-section"><span class="num">Sec. 805</span><h3>Express Repeals.</h3></div>
+    <p>The following provisions are hereby repealed in their entirety:</p>
+    <p class="indent">(1) Section 1604 of the Agricultural Act of 2014 (family-member exemption).</p>
+    <p class="indent">(2) Section 11017 of the Agricultural Act of 2014 (SRA budget-neutrality).</p>
+    <p class="indent">(3) Section 502(c) of the Federal Crop Insurance Act (recipient confidentiality).</p>
+    <p class="indent">(4) Sections 10301 and 10302 of the One Big Beautiful Bill Act of 2025 (pass-through multiplier; AGI exception).</p>
+
+    <div class="signature-block">
+      <p class="sig-attest">I hereby attest that the foregoing is a true and accurate working draft of a bill to be considered by the Committee on Agriculture, Nutrition, and Forestry of the United States Senate.</p>
+      <div class="seal-stamp">
+        <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="55" cy="55" r="52" fill="none" stroke="#1c1917" stroke-width="1.5"/>
+          <circle cx="55" cy="55" r="46" fill="none" stroke="#1c1917" stroke-width="0.8"/>
+          <circle cx="55" cy="55" r="32" fill="none" stroke="#8b6914" stroke-width="0.6"/>
+          <g stroke="#8b6914" stroke-width="1" fill="none">
+            <path d="M 40 65 Q 42 55 50 45"/>
+            <path d="M 70 65 Q 68 55 60 45"/>
+            <ellipse cx="50" cy="45" rx="2" ry="4" fill="#c89732" stroke="none" transform="rotate(-20 50 45)"/>
+            <ellipse cx="60" cy="45" rx="2" ry="4" fill="#c89732" stroke="none" transform="rotate(20 60 45)"/>
+            <path d="M 47 50 L 44 47 M 53 48 L 56 45 M 56 50 L 53 47 M 64 47 L 67 50"/>
+          </g>
+          <circle cx="55" cy="60" r="2" fill="#8b6914"/>
+          <path id="topcircle" d="M 19 55 A 36 36 0 0 1 91 55" fill="none"/>
+          <text font-family="JetBrains Mono" font-size="6" fill="#1c1917" letter-spacing="3"><textPath href="#topcircle" startOffset="50%" text-anchor="middle">FAIR · FARMS · ACT</textPath></text>
+          <path id="botcircle" d="M 19 60 A 36 36 0 0 0 91 60" fill="none"/>
+          <text font-family="JetBrains Mono" font-size="6" fill="#1c1917" letter-spacing="3"><textPath href="#botcircle" startOffset="50%" text-anchor="middle">MMXXVI</textPath></text>
+        </svg>
+      </div>
+      <div class="sig-grid">
+        <div>
+          <div class="sig-line">[ signature ]</div>
+          <div class="sig-cap">Chair<small>Committee on Agriculture, Nutrition, and Forestry</small></div>
+        </div>
+        <div>
+          <div class="sig-line">[ signature ]</div>
+          <div class="sig-cap">Ranking Member<small>Committee on Agriculture, Nutrition, and Forestry</small></div>
+        </div>
+      </div>
+      <p class="filed-text">⬢ Filed · Discussion Draft · Not Introduced · Spring · MMXXVI ⬢</p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="page-foot">
+  <div class="page-foot-inner">
+    <button data-tab="urban"><span class="label">← Previous</span><span class="target">Page VI · Urban Harvest</span></button>
+    <button data-tab="overview" class="next"><span class="label">Return →</span><span class="target">Page I · Overview</span></button>
+  </div>
+</footer>
+
+</section>
+
+</main>
+
+<footer class="colophon">
+  <div class="colophon-grid">
+    <div>
+      <div class="colophon-mark">The Fair Farms Act</div>
+      <p class="colophon-tagline">A discussion-draft framework for restructuring the federal agricultural support system around the producers who actually need it — and the practices a healthy food system actually requires.</p>
+    </div>
+    <div>
+      <h5>Repeals</h5>
+      <ul><li>2014 § 1604</li><li>2014 § 11017</li><li>7 U.S.C. § 1502(c)</li><li>OBBBA §§ 10301-02</li></ul>
+    </div>
+    <div>
+      <h5>Amends</h5>
+      <ul><li>7 U.S.C. § 1308</li><li>7 U.S.C. § 1308–1</li><li>7 U.S.C. § 1508</li><li>7 U.S.C. § 9011 et seq.</li></ul>
+    </div>
+    <div>
+      <h5>Establishes</h5>
+      <ul><li>Title V Land Trust</li><li>Title VI Coop Fund</li><li>Title VII Urban Harvest</li><li>Stewardship payments</li></ul>
+    </div>
+  </div>
+  <div class="colophon-bottom">
+    <span>Discussion Draft · Not Introduced</span>
+    <span>Set in Fraunces &amp; Source Serif 4</span>
+    <span>Spring · MMXXVI</span>
+  </div>
+</footer>
+
+<script>
+  // Tab switching
+  const TAB_LABELS = {
+    overview: 'Volume I · Spring 2026',
+    problem: 'Page II of VII · The Problem',
+    tiers: 'Page III of VII · The Tier System',
+    programs: 'Page IV of VII · The Programs',
+    regenerative: 'Page V of VII · Regenerative Transition',
+    urban: 'Page VI of VII · Urban Harvest',
+    proposal: 'Page VII of VII · The Full Proposal'
+  };
+
+  function switchTab(name) {
+    // Hide all panels, deactivate all nav buttons
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+
+    // Show selected panel and activate corresponding nav button
+    const panel = document.getElementById('panel-' + name);
+    if (panel) panel.classList.add('active');
+
+    document.querySelectorAll('.nav button[data-tab="' + name + '"]').forEach(b => b.classList.add('active'));
+
+    // Update topbar text
+    document.getElementById('topbar-page').textContent = TAB_LABELS[name] || '';
+
+    // Toggle proposal-only watermark
+    document.body.classList.toggle('on-proposal', name === 'proposal');
+
+    // Scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Update URL hash without scrolling
+    try {
+      history.replaceState(null, '', '#' + name);
+    } catch(e) {
+      // Silently ignore in sandboxed environments
+    }
+
+    // Re-trigger reveal animations for newly visible content
+    setTimeout(() => {
+      panel.querySelectorAll('.reveal').forEach(el => {
+        el.classList.remove('in');
+      });
+      requestAnimationFrame(() => {
+        panel.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      });
+    }, 50);
+  }
+
+  // Wire up all tab-switching elements
+  document.querySelectorAll('[data-tab]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tab = el.getAttribute('data-tab');
+      if (tab) switchTab(tab);
+    });
+  });
+
+  // Reveal-on-scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Programs page accordion
+  document.querySelectorAll('.title-item-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      item.classList.toggle('open');
+    });
+  });
+
+  // Restore tab from URL hash
+  const initialHash = window.location.hash.slice(1);
+  if (initialHash && document.getElementById('panel-' + initialHash)) {
+    switchTab(initialHash);
+  }
+</script>
+
+</body>
+</html>
